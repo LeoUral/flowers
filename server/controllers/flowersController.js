@@ -1,4 +1,7 @@
+const ApiError = require('../error/ApiError')
+
 class FlowersController {
+
     /**
      * Создание позиции цветка
      * @param {*} req 
@@ -54,7 +57,7 @@ class FlowersController {
     }
 
     /**
-     * Обновление цветов
+     * Обновление позиции цветка
      * @param {*} req 
      * @param {*} res 
      */
@@ -63,22 +66,33 @@ class FlowersController {
     }
 
     /**
-     * Получение всех цветов
+     * Получение всех позиций цветов
      * @param {*} req 
      * @param {*} res 
      */
     async getAll(req, res) {
 
+        res.json('flowers all')
     }
 
     /**
-     * Получение одного цветка
+     * Получение одной позиции выбранного цветка
      * @param {*} req 
      * @param {*} res 
      */
-    async get(req, res) {
+    async getOne(req, res) {
+
+        res.json('flowers controller')
+    }
+
+    /**
+     * Удаление выбранной позиции цветка
+     * @param {*} req 
+     * @param {*} res 
+     */
+    async deleteOne(req, res) {
 
     }
 }
 
-module.exports = new FlowersController()
+module.exports = new FlowersController();

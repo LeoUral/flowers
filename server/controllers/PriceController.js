@@ -1,18 +1,31 @@
 class PriceController {
+
+    /**
+     * Создание коэффициентов для прайса
+     * @param {*} req 
+     * @param {*} res 
+     */
     async create(req, res) {
 
     }
 
+    /**
+     * Обновление коэффициентов для прайса
+     * @param {*} req 
+     * @param {*} res 
+     */
     async update(req, res) {
 
     }
 
-    async getAll(req, res) {
+    /**
+     * Получение коэффициентов для прайса
+     * @param {*} req 
+     * @param {*} res 
+     */
+    async getOne(req, res) {
 
-    }
-
-    async get(req, res) {
-
+        res.json('price controller')
     }
 }
 

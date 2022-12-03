@@ -6,12 +6,16 @@ const userRouter = require('./userRouter')
 const orderRouter = require('./orderRouter')
 const relatedRouter = require('./relatedRouter')
 const packageRouter = require('./packageRouter')
+const priceRouter = require('./priceRouter')
+const basketRouter = require('./basketRouter')
 
 router.use('/user', userRouter)
-router.use('/flowers,', flowersRouter)
+router.use('/flowers', flowersRouter)
 router.use('/bouquet', bouquetRouter)
 router.use('/order', orderRouter)
 router.use('/package', packageRouter)
 router.use('/related', relatedRouter)
+router.use('/price', priceRouter)
+router.use('/basket', basketRouter)
 
 module.exports = router

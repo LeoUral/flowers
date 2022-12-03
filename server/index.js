@@ -10,6 +10,8 @@ const DB_NAME = process.env.DB_NAME || 'flowers';
 const URL_MONGODB = process.env.URL_MONGODB || 'mongodb://localhost:27017';
 const clientPromise = new MongoClient(URL_MONGODB, { useUnifiedTopology: true, maxPoolSize: 10 }); // подключение MongoDB
 
+const ApiError = require('./error/ApiError')
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -24,7 +26,7 @@ app.use(async (req, res, next) => {
 
     } catch (err) {
         console.log(`Ошибка формирования объекта подключения к MongoDB: `, err);
-        next(err)
+        next(ApiError.internal('Нет подключения к DB'))
     }
 })
 
