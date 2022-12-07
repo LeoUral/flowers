@@ -15,7 +15,7 @@ const ApiError = require('./error/ApiError')
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api', router);
+app.use(express.urlencoded());
 
 //* объект подключения к MongoDB
 app.use(async (req, res, next) => {
@@ -44,7 +44,7 @@ const DB = async () => {
 
 
 
-
+app.use('/api', router);
 
 //* Обаботка ошибок
 app.use(errorHandler)
