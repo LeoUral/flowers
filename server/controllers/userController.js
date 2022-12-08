@@ -1,8 +1,10 @@
 require('dotenv').config();
+const { log } = require('console');
 const crypto = require("crypto");
 const ApiError = require('../error/ApiError');
 const addNewUser = require('../model/users/addNewUser');
 const checkLogin = require('../model/users/checkLogin');
+const getUserData = require('../model/users/getUserData');
 const SECRET = process.env.SECRET || 'Jc4EUsxLADBu_sm0g2lnX'
 
 class UserController {
@@ -67,16 +69,22 @@ class UserController {
         const { login, password } = req.body;
         const db = req.db;
 
-        //todo: получить данные пользователя по логину
+        //*: получить данные пользователя по логину
+        const userData = await getUserData(db, login);
 
         //*: хешировать введенный пароль
         const confusionPassword = crypto.createHash("sha256", SECRET).update(password).digest("hex");
 
-        //todo: сравнить пароли
+        //*: сравнить пароли
+        if (!userData || userData.password !== confusionPassword || userData.login !== login) {
+            console.log(`НЕТ ВХОДА`);
+            next(ApiError.badRequest('Нет входа'))
+        }
 
         //todo: если сходятся пароли и логин, то созадть сессию
+        console.log(`Вход в систему, созадть сессию`);
 
-
+        res.json({ server: 'вход' })
 
     }
 
