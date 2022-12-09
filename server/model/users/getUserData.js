@@ -1,6 +1,11 @@
 const ApiError = require('../../error/ApiError')
 
-
+/**
+ * Получаем данные пользователя
+ * @param {Object} db Объект DB
+ * @param {String} login login пользователя
+ * @returns {Object} Регистрационный объект пользователя
+ */
 module.exports = async (db, login) => {
     try {
         return (async () => {
