@@ -26,7 +26,7 @@ module.exports = async (db, nameCollection, nameDocument) => {
         })()
     } catch (err) {
         console.log(`Ошибка (createDocument.js): `, err);
-        return next(ApiError.badRequest('Ошибка создания документа в DB (createDocument.js)'))
+        return (ApiError.badRequest('Ошибка создания документа в DB (createDocument.js)'))
     }
 
 }

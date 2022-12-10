@@ -19,6 +19,10 @@ module.exports = async (db, login, sessionId) => {
                 .findOne({ _id: 'sessions' })
             console.log(`TIMER::::: `, (result[login]?.time - (Date.now() - 1000 * 60 * timer))); // test
 
+            if ((result[login]?.time - (Date.now() - 1000 * 60 * timer)) < 0) {
+                console.log(`Время сессии закончилось!`); // test
+            }
+
             if (
                 result[login]?.sessionId === sessionId &&
                 result[login]?.time > (Date.now() - 1000 * 60 * timer)
@@ -31,6 +35,6 @@ module.exports = async (db, login, sessionId) => {
 
     } catch (err) {
         console.log(`Ошибка (getSessionData.js): `, err);
-        return next(ApiError.badRequest('Ошибка при получении сессии в DB (getSessionData.js)'))
+        return (ApiError.badRequest('Ошибка при получении сессии в DB (getSessionData.js)'))
     }
 }

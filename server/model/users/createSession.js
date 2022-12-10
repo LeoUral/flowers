@@ -12,7 +12,7 @@ module.exports = async (db, login) => {
     try {
         return (async () => {
             const resultCreateDocument = await createDocument(db, 'users', 'sessions') // проверяем наличие, если нет, то созадем документ
-            console.log(`${resultCreateDocument ? 'Создан новй документ' : 'Документ уже есть'}`); // test
+            // console.log(`${resultCreateDocument ? 'Создан новй документ' : 'Документ уже есть'}`); // test
 
             const sessionId = uuid.v4();
             console.log(`session ID::::: `, sessionId); // test
@@ -29,7 +29,7 @@ module.exports = async (db, login) => {
 
     } catch (err) {
         console.log(`Ошибка (createSession.js): `, err);
-        return next(ApiError.badRequest('Ошибка записи сессии в DB (createSession.js)'))
+        return (ApiError.badRequest('Ошибка записи сессии в DB (createSession.js)'))
     }
 
 }

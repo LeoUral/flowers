@@ -16,7 +16,7 @@ module.exports = async (db, login) => {
         })()
     } catch (err) {
         console.log(`Ошибка (getUserData.js): `, err);
-        return next(ApiError.badRequest('Ошибка получения данных пользователя (getUserData.js)'))
+        return (ApiError.badRequest('Ошибка получения данных пользователя (getUserData.js)'))
     }
 
 }

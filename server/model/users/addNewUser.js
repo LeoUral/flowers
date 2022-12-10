@@ -18,6 +18,6 @@ module.exports = async (db, data) => {
         })()
     } catch (err) {
         console.log(`Ошибка (addNewUser.js): `, err);
-        return next(ApiError.badRequest('Ошибка добавления новго пользователя (addNewUser.js)'))
+        return (ApiError.badRequest('Ошибка добавления новго пользователя (addNewUser.js)'))
     }
 }

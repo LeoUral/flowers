@@ -22,6 +22,6 @@ module.exports = async (db, login) => {
 
     } catch (err) {
         console.log(`Ошибка (checkLogin.js): `, err);
-        return next(ApiError.badRequest('Ошибка обращения к DB (checkLogin.js)'))
+        return (ApiError.badRequest('Ошибка обращения к DB (checkLogin.js)'))
     }
 }

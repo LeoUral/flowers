@@ -94,7 +94,7 @@ class UserController {
     }
 
     /**
-     * Выходи из приложения и удаление сессии
+     * Выход из приложения и удаление сессии
      * @param {*} req 
      * @param {*} res 
      * @param {*} next
@@ -110,7 +110,7 @@ class UserController {
         if (resultDeleteSession.modifiedCount) {
             res.json({ session: 'Сессия удалена' })
         } else {
-            return next(ApiError.badRequest('Нет сессии или логина.'))
+            return next(ApiError.badRequest('Удаление сессии. Нет сессии или логина.'))
         }
     }
 
