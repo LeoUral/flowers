@@ -58,7 +58,7 @@ class UserController {
 
         } catch (err) {
             console.log(`Ошибка при регистрации: `, err);
-            next(ApiError.internal('Ошибка при регистрации'))
+            return next(ApiError.internal('Ошибка при регистрации'))
         }
     }
 
@@ -88,7 +88,7 @@ class UserController {
 
         } else {
             console.log(`НЕТ ВХОДА`);
-            next(ApiError.badRequest('Нет входа'))
+            return next(ApiError.badRequest('Нет входа'))
         }
 
     }
