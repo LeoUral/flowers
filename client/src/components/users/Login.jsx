@@ -10,7 +10,10 @@ export default class Login extends React.Component {
     render() {
         return (
             <>
-                <ModalMiddle />
+                <ModalMiddle
+                    textHeader={`Вход в систему 'Рыжая лавка'`}
+                    textFooter=''
+                />
             </>
         )
     }
