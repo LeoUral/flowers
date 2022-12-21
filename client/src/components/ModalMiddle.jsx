@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React from "react";
 import InputDataUser from "./users/InputDataUser";
 
@@ -7,9 +8,34 @@ export default class ModalMiddle extends React.Component {
         this.state = {
             textHeader: '',
             textFooter: '',
+            login: '',
+            password: '',
         }
+        this.doChange = this.doChange.bind(this);
 
     }
+
+    doChange(e) {
+        switch (e.target.dataset.change) {
+            case 'login': this.setState({ login: e.target.value })
+                break
+
+            case 'password': this.setState({ password: e.target.value })
+                break
+
+            case 'button_login': console.log(`CLICK LOGIN`)
+                break
+
+            case 'button_registration': console.log(`CLICK REGISTRATION`)
+                break
+        }
+
+        setTimeout(() => {
+            console.log(`login: `, this.state.login); // test
+            console.log(`password: `, this.state.password); //test
+        })
+    }
+
     componentDidMount() {
         this.setState({
             textHeader: this.props.textHeader,
@@ -32,7 +58,9 @@ export default class ModalMiddle extends React.Component {
                             </div>
                         </header>
                         <div className="modal_middle_windo_context" >
-                            <InputDataUser />
+                            <InputDataUser
+                                doChange={this.doChange}
+                            />
                         </div>
                         <footer className="modal_middle_window_footer" >
                             <span> {this.state.textFooter}</span>

@@ -56,9 +56,9 @@
   width: 100%;
   height: 70%;
   padding: 2.5%;
-  background-color: #fff;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  background-color: #fff;
 }
 
 .modal_middle_window .modal_middle_window_footer {
@@ -104,6 +104,59 @@
   height: 20px;
   font-size: 20px;
   padding: 10px;
+  border-radius: 5px;
+  border-color: #779fcb;
+}
+
+.box_flex_button {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  margin: 5% 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.input_box_button {
+  width: 150px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+.input_box_button .input_button {
+  width: 100%;
+  height: 100%;
+  background-color: #779fcb;
+  border: none;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 10px #aaa;
+          box-shadow: 5px 5px 10px #aaa;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.input_box_button :hover {
+  background-color: #e77f51;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.input_box_button :active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
 }
 
 .close_modal {
@@ -112,11 +165,13 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #eee;
+  background-color: #779fcb;
   top: -30px;
   right: -30px;
   -webkit-box-shadow: 5px 5px 10px #555;
           box-shadow: 5px 5px 10px #555;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
 }
 
 .close_modal .close_modal_cross {
@@ -125,10 +180,14 @@
 }
 
 .close_modal:hover {
-  background-color: #ccc;
+  background-color: #e77f51;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
 }
 
 .close_modal:active {
   -webkit-box-shadow: none;
           box-shadow: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
 }

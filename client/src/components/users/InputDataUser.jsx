@@ -1,20 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
-const InputDataUser = () => {
+const InputDataUser = ({ doChange }) => {
 
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-
-    const doChangeLogin = (e) => {
-        setLogin(e.target.value)
-        console.log(`E::: `, login); // test
-    }
-
-    const doChangePassword = (e) => {
-        setPassword(e.target.value)
-        console.log(`Pass::: `, login); // test
-    }
 
     return (
         <>
@@ -24,8 +12,9 @@ const InputDataUser = () => {
                     <input
                         type="text"
                         className='input_login'
-                        onChange={doChangeLogin}
-                        value={login}
+                        data-change='login'
+                        onChange={doChange}
+                    // value={login}
                     />
                 </div>
             </div>
@@ -36,8 +25,31 @@ const InputDataUser = () => {
                     <input
                         type="text"
                         className='input_login'
-                        onChange={doChangePassword}
-                        value={password}
+                        data-change='password'
+                        onChange={doChange}
+                    // value={password}
+                    />
+                </div>
+            </div>
+
+            <div className='box_flex_button'>
+                <div className='input_box_button'>
+                    <input
+                        type="button"
+                        className='input_button'
+                        data-change='button_login'
+                        onClick={doChange}
+                        value={'LOGIN'}
+                    />
+                </div>
+
+                <div className='input_box_button'>
+                    <input
+                        type="button"
+                        className='input_button'
+                        data-change='button_registration'
+                        onClick={doChange}
+                        value={'REGISTRATION'}
                     />
                 </div>
             </div>
