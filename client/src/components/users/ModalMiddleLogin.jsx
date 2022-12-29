@@ -1,8 +1,8 @@
 /* eslint-disable default-case */
 import React from "react";
-import InputDataUser from "./users/InputDataUser";
+import InputDataUser from "./InputDataUser";
 
-export default class ModalMiddle extends React.Component {
+export default class ModalMiddleLogin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,9 +24,11 @@ export default class ModalMiddle extends React.Component {
                 break
 
             case 'button_login': console.log(`CLICK LOGIN`)
+                this.props.doLogin(this.state.login, this.state.password);
                 break
 
             case 'button_registration': console.log(`CLICK REGISTRATION`)
+                this.props.doRegistration();
                 break
         }
 
@@ -35,6 +37,8 @@ export default class ModalMiddle extends React.Component {
             console.log(`password: `, this.state.password); //test
         })
     }
+
+
 
     componentDidMount() {
         this.setState({
