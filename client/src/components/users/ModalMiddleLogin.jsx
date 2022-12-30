@@ -38,8 +38,6 @@ export default class ModalMiddleLogin extends React.Component {
         })
     }
 
-
-
     componentDidMount() {
         this.setState({
             textHeader: this.props.textHeader,

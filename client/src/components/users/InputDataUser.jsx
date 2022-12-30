@@ -23,7 +23,7 @@ const InputDataUser = ({ doChange }) => {
                 <div className='text_box'>PASSWOD: </div>
                 <div className='input_box'>
                     <input
-                        type="text"
+                        type="password"
                         className='input_login'
                         data-change='password'
                         onChange={doChange}

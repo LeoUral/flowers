@@ -8,6 +8,8 @@ export default class ModalMiddleRegistration extends React.Component {
         this.state = {
             textHeader: '',
             textFooter: '',
+            login: '',
+            password: '',
             name: '',
             surname: '',
             patron: '',
@@ -22,6 +24,12 @@ export default class ModalMiddleRegistration extends React.Component {
 
     doChange(e) {
         switch (e.target.dataset.change) {
+            case 'email': this.setState({ login: e.target.value })
+                break
+
+            case 'password': this.setState({ password: e.target.value })
+                break
+
             case 'name': this.setState({ name: e.target.value })
                 break
 
@@ -34,8 +42,11 @@ export default class ModalMiddleRegistration extends React.Component {
             case 'phone': this.setState({ phone: e.target.value })
                 break
 
-            case 'button_save': console.log(`CLICK button_save`)
+            case 'button_save':
+                console.log(`CLICK button_save`) // test
                 this.props.doSendRegistration({
+                    login: this.state.login,
+                    password: this.state.password,
                     name: this.state.name,
                     surname: this.state.surname,
                     patron: this.state.patron,
@@ -85,7 +96,7 @@ export default class ModalMiddleRegistration extends React.Component {
                     <div className="shadow" >
 
                     </div>
-                    <div className="modal_middle_window2" >
+                    <div className="modal_middle_window" >
                         <header className="modal_middle_window_head" >
                             <span> {this.state.textHeader}</span>
                             <div className="close_modal" >

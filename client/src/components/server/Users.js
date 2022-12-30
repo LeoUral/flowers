@@ -13,6 +13,9 @@ class Users {
      */
     async sendDataUsers(data) {
         try {
+
+            console.log(`data >>>> `, data); // test
+
             const url = `${this.URL}${PORT}/api/user/registration`
             const userBody = {
                 login: data.login,
@@ -24,7 +27,7 @@ class Users {
                 gender: data.gender,
             }
 
-            if (!data.login || data.password) {
+            if (!data.login || !data.password) {
                 throw new Error('Не указан логин или пароль')
             }
 

@@ -29,46 +29,7 @@
 
 .modal_middle_window {
     width: 50vw;
-    height: 50vh;
-    position: absolute;
-    top: 25vh;
-    left: 25vw;
-    z-index: 101;
-    background-color: $color_bg_modal_middle;
-    border: $border_modal_middle solid $color_border_modal_middle;
-    border-radius: $radius_border_modal_middle;
-    box-shadow: $shadow_border_modal_middle;
-    box-sizing: border-box;
-    .modal_middle_window_head {
-        width: 100%;
-        height: 15%;
-        padding: 2.5%;
-        background-color: $color_bg_modal_middle_header;
-        border-radius: 5px 5px 0 0;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 102;
-    }
-    .modal_middle_windo_context {
-        width: 100%;
-        height: 70%;
-        padding: 2.5%;
-        box-sizing: border-box;
-        background-color: $color_bg_modal_middle_context;
-    }
-    .modal_middle_window_footer {
-        width: 100%;
-        height: 15%;
-        padding: 2.5%;
-        background-color: $color_bg_modal_middle_footer;
-        border-radius: 0 0 5px 5px;
-        box-sizing: border-box;
-    }
-}
-
-.modal_middle_window2 {
-    width: 50vw;
-    height: 60vh;
+    height: auto;
     position: absolute;
     top: 15vh;
     left: 25vw;
@@ -86,13 +47,19 @@
         border-radius: 5px 5px 0 0;
         box-sizing: border-box;
         position: relative;
+        font-size: 20px;
+        font-weight: 500;
         z-index: 102;
     }
     .modal_middle_windo_context {
         width: 100%;
         height: 70%;
-        padding: 2.5%;
+        padding: 2.5% 2.5% 0.5% 2.5%;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
         background-color: $color_bg_modal_middle_context;
     }
     .modal_middle_window_footer {
@@ -127,6 +94,16 @@
     text-align: center;
 }
 
+.input_box2 {
+    width: 20%;
+    text-align: center;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px 0 0 15px;
+}
+
 .input_login {
     width: 100%;
     height: 40%;
@@ -134,6 +111,13 @@
     padding: 10px;
     border-radius: 5px;
     border-color: $color_blue;
+}
+
+.input_radio {
+    width: 100%;
+    height: 90%;
+    margin: 3px 0 0 -30px;
+    cursor: pointer;
 }
 
 .box_flex_button {

@@ -7,6 +7,30 @@ const InputDataRegistration = ({ doChange, checked }) => {
     return (
         <>
             <div className='box_flex'>
+                <div className='text_box'> Email (login): </div>
+                <div className='input_box'>
+                    <input
+                        type="text"
+                        className='input_login'
+                        data-change='email'
+                        onChange={doChange}
+                    />
+                </div>
+            </div>
+
+            <div className='box_flex'>
+                <div className='text_box'> Password: </div>
+                <div className='input_box'>
+                    <input
+                        type="password"
+                        className='input_login'
+                        data-change='password'
+                        onChange={doChange}
+                    />
+                </div>
+            </div>
+
+            <div className='box_flex'>
                 <div className='text_box'> Имя: </div>
                 <div className='input_box'>
                     <input
@@ -14,7 +38,6 @@ const InputDataRegistration = ({ doChange, checked }) => {
                         className='input_login'
                         data-change='name'
                         onChange={doChange}
-                    // value={login}
                     />
                 </div>
             </div>
@@ -27,7 +50,6 @@ const InputDataRegistration = ({ doChange, checked }) => {
                         className='input_login'
                         data-change='surname'
                         onChange={doChange}
-                    // value={password}
                     />
                 </div>
             </div>
@@ -40,7 +62,6 @@ const InputDataRegistration = ({ doChange, checked }) => {
                         className='input_login'
                         data-change='patron'
                         onChange={doChange}
-                    // value={password}
                     />
                 </div>
             </div>
@@ -53,7 +74,6 @@ const InputDataRegistration = ({ doChange, checked }) => {
                         className='input_login'
                         data-change='phone'
                         onChange={doChange}
-                    // value={password}
                     />
                 </div>
             </div>
@@ -61,26 +81,24 @@ const InputDataRegistration = ({ doChange, checked }) => {
             <form>
                 <div className='box_flex'>
                     <div className='text_box'>Пол: </div>
-                    <div className='input_box'> Муж:
+                    <div className='input_box2'> Муж:
                         <input
                             type="radio"
-                            className='input_login'
+                            className='input_radio'
                             data-change='gender'
                             value='man'
                             checked={checked}
                             onChange={doChange}
-                        // value={password}
                         />
                     </div>
-                    <div className='input_box'> Жен:
+                    <div className='input_box2'> Жен:
                         <input
                             type="radio"
-                            className='input_login'
+                            className='input_radio'
                             data-change='gender'
                             value='woman'
                             checked={!checked}
                             onChange={doChange}
-                        // value={password}
                         />
                     </div>
                 </div>
