@@ -12,6 +12,19 @@ export default class Main extends React.Component {
 
         this.doRegistration = this.doRegistration.bind(this);
         this.doCloseRegistration = this.doCloseRegistration.bind(this);
+        this.doStart = this.doStart.bind(this);
+    }
+
+    doStart(key) {
+
+        if (key === 'admin') {
+            console.log(`go ADMIN`); // test
+            this.setState({ showLogin: false })
+            // todo: запустить панель администратора
+        } else {
+            console.log(`go USER`); // test
+            this.setState({ showLogin: false })
+        }
     }
 
     doCloseRegistration() {
@@ -34,6 +47,7 @@ export default class Main extends React.Component {
                 {this.state.showLogin &&
                     <Login
                         doRegistration={this.doRegistration}
+                        doStart={this.doStart}
                     />}
                 {this.state.showRegistration &&
                     <Registration
