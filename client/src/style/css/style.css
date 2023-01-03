@@ -86,6 +86,67 @@
           box-sizing: border-box;
 }
 
+.modal_window {
+  width: 80vw;
+  height: auto;
+  position: absolute;
+  top: 7vh;
+  left: 10vw;
+  z-index: 101;
+  background-color: #fff;
+  border: 2px solid none;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 10px #555;
+          box-shadow: 5px 5px 10px #555;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.modal_window .modal_window_head {
+  width: 100%;
+  height: 5%;
+  padding: 1.5%;
+  background-color: #eee;
+  border-radius: 5px 5px 0 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+  font-size: 20px;
+  font-weight: 500;
+  z-index: 102;
+}
+
+.modal_window .modal_windo_context {
+  width: 100%;
+  height: 90%;
+  padding: 2.5% 2.5% 2.5% 2.5%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  background-color: #fff;
+}
+
+.modal_window .modal_window_footer {
+  width: 100%;
+  height: 5%;
+  padding: 1%;
+  background-color: #eee;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .box_flex {
   width: 100%;
   display: -webkit-box;
@@ -225,6 +286,119 @@
 }
 
 .close_modal:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.navibar {
+  width: 100%;
+  height: 40px;
+  background-color: #779fcb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  position: fixed;
+}
+
+.navibar .navibar_left {
+  width: 70%;
+  height: 40px;
+  background-color: #779fcb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.navibar .navibar_right {
+  width: 30%;
+  height: 40px;
+  background-color: #779fcb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.navibar_logo {
+  font-size: 20px;
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.navi_button {
+  font-size: 20px;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.navi_button:hover {
+  color: #e77f51;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.navi_button:active {
+  color: #fff;
+}
+
+.button_panel {
+  width: 100%;
+  height: 40px;
+  margin: 10px auto;
+}
+
+.button_panel .btn_panel {
+  width: 140px;
+  height: 35px;
+  margin: 5px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px;
+  background-color: #ccc;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 10px #555;
+          box-shadow: 5px 5px 10px #555;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.button_panel .btn_panel:hover {
+  background-color: #779fcb;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  color: #fff;
+}
+
+.button_panel .btn_panel:active {
+  background-color: #e77f51;
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transition: 0.25s;

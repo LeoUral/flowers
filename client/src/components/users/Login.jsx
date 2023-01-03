@@ -24,6 +24,7 @@ export default class Login extends React.Component {
 
                 if (result.sessionId) {
                     localStorage.setItem('session', result.sessionId)
+                    localStorage.setItem('login', login);
                     console.log(`Вход разрешен`); // test
 
                     if (login === 'Admin') {

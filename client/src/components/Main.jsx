@@ -1,29 +1,64 @@
 import React from 'react'
+import NaviBar from './NaviBar';
 import Login from './users/Login';
 import Registration from './users/Registration';
+import Users from './server/Users';
+import Admin from './admin/Admin';
 
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showLogin: true,
-            showRegistration: false
+            showRegistration: false,
+            showAdmin: false,
+            login: '',
         }
 
         this.doRegistration = this.doRegistration.bind(this);
         this.doCloseRegistration = this.doCloseRegistration.bind(this);
         this.doStart = this.doStart.bind(this);
+        this.doExit = this.doExit.bind(this);
+        this.doSignIn = this.doSignIn.bind(this);
+    }
+
+    doExit() {
+        try {
+            (async () => {
+                // todo: сделать выход из системы с удалением сессии. На backend функция есть
+                console.log(`Exit from system`); // test   
+                const result = await Users.logOut(localStorage.getItem('login'))
+                this.setState({ login: '' })
+                localStorage.removeItem('login')
+                console.log(`RESULT: `, result); // test
+            })()
+        } catch (err) {
+            console.log(`Ошибка при выходе из системы`);
+        }
+
+    }
+
+    doSignIn() {
+        this.setState({
+            showLogin: true,
+        })
     }
 
     doStart(key) {
 
         if (key === 'admin') {
             console.log(`go ADMIN`); // test
-            this.setState({ showLogin: false })
-            // todo: запустить панель администратора
+            this.setState({
+                showLogin: false,
+                showAdmin: true,
+                login: localStorage.getItem('login')
+            })
         } else {
             console.log(`go USER`); // test
-            this.setState({ showLogin: false })
+            this.setState({
+                showLogin: false,
+                login: localStorage.getItem('login')
+            })
         }
     }
 
@@ -41,6 +76,15 @@ export default class Main extends React.Component {
         })
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('session')) {
+            this.setState({
+                showLogin: false,
+                login: localStorage.getItem('login'),
+            })
+        }
+    }
+
     render() {
         return (
             <>
@@ -53,6 +97,15 @@ export default class Main extends React.Component {
                     <Registration
                         doClose={this.doCloseRegistration}
                     />}
+                {this.state.showAdmin &&
+                    <Admin />
+                }
+
+                <NaviBar
+                    login={this.state.login}
+                    handleExit={this.doExit}
+                    handleSignIn={this.doSignIn}
+                />
             </>
         )
     }
