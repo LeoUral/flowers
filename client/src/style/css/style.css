@@ -404,3 +404,30 @@
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
+
+.table_all {
+  width: 100%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+
+.table_all .table_all_head .table_all_tr .table_all_th {
+  border: 1px solid #000;
+  height: 40px;
+  background-color: #ccc;
+}
+
+.table_all .table_all_head .table_all_tr .table_all_th_point {
+  width: 50px;
+}
+
+.table_all .table_all_body .table_all_tr .table_all_td {
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+.table_all .table_all_body .table_all_tr .table_all_td_point {
+  width: 50px;
+  text-align: center;
+}

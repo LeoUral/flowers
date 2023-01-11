@@ -1,6 +1,7 @@
 import React from 'react'
 import Users from '../server/Users';
 import check from '../server/doCheck'
+import TableClients from './TableClients';
 
 export default class Clients extends React.Component {
     constructor(props) {
@@ -41,6 +42,9 @@ export default class Clients extends React.Component {
             <>
                 <div>
                     CLIENTS COMPONENT
+                    <TableClients
+                        clients={this.state.clients.clients}
+                    />
                 </div>
             </>
         )
