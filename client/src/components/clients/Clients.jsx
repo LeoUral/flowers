@@ -41,7 +41,6 @@ export default class Clients extends React.Component {
         return (
             <>
                 <div>
-                    CLIENTS COMPONENT
                     <TableClients
                         clients={this.state.clients.clients}
                     />
