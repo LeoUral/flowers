@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const InputString = ({ title, placeholder, keyInput, sendObjectText }) => {
+const InputString = ({ title, placeholder, keyInput, doChangeSelect }) => {
 
     const [text, setText] = useState('');
     const [keyText, setKeyText] = useState('');
@@ -12,7 +12,7 @@ const InputString = ({ title, placeholder, keyInput, sendObjectText }) => {
 
 
     useEffect(() => {
-        sendObjectText({ key: keyText, text: text })
+        doChangeSelect({ key: keyText, text: text })
     }, [text, keyText])
 
 

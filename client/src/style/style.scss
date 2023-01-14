@@ -333,7 +333,7 @@
 }
 
 .input_string {
-    width: 250px;
+    width: 280px;
     height: 30px;
     font-size: 18px;
     padding: 0 10px;
@@ -341,11 +341,12 @@
 }
 
 .input_string_title {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .select_string {
-    width: 250px;
+    width: 300px;
     height: 30px;
     font-size: 18px;
     padding: 0 10px;
@@ -353,5 +354,18 @@
 }
 
 .select_string_title {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.new_flower {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .new_flower_box {
+        width: 350px;
+        height: 30px;
+        margin: 15px 10px;
+    }
 }

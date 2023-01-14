@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-const SelectString = ({ title, keySelect }) => {
+const SelectString = ({ title, keySelect, arr, doChangeSelect }) => {
+
+    const [select, setSelect] = useState('')
+    const [key, setKey] = useState('')
 
     const handleSelect = (e) => {
-        console.log(e.target.value, e.target.dataset.key);
+        setSelect(e.target.value);
+        setKey(e.target.dataset.key)
     }
+
+    useEffect(() => {
+        doChangeSelect({ key: key, text: select })
+    }, [select])
 
     return (
         <>
@@ -18,9 +26,17 @@ const SelectString = ({ title, keySelect }) => {
                 data-key={keySelect}
                 onChange={handleSelect}
             >
-                <option> text 1 </option>
-                <option> text 2 </option>
-                <option> text 3 </option>
+                {
+                    arr && arr.map((item, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <option>
+                                    {item}
+                                </option>
+                            </React.Fragment>
+                        )
+                    })
+                }
             </select>
         </>
     )
