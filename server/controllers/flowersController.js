@@ -4,16 +4,36 @@ const addGrowth = require('../model/flowers/addGrowth');
 const addManufacturer = require('../model/flowers/addManufacturer');
 const addNameFlower = require('../model/flowers/addNameFlower');
 const getDocument = require('../model/getDocument');
+const path = require('path');
+const uuid = require('uuid');
+const { log } = require('console');
+
 
 class FlowersController {
 
     /**
-     * Создание позиции цветка
+     * Создание позиции цветка в DB
      * @param {*} req 
      * @param {*} res 
+     * @param {*} next
      */
-    async create(req, res) {
+    async create(req, res, next) {
 
+        const db = req.db
+        const { data } = req.body
+        const id = uuid.v4()
+
+        try {
+            const result = await db.collection('cut')
+                .insertOne({ _id: id, data })
+
+            console.log(`RESULT SAVE: `, result); // test
+            res.json({ server: 'Данные добавлены' })
+
+        } catch (err) {
+            console.log(`Ошибка при добавлении новой позиции цветка: `, err);
+            return next(ApiError.internal('Ошибка при добавлении новой позиции цветка'))
+        }
     }
 
     /**
@@ -133,7 +153,29 @@ class FlowersController {
      * @param {*} req 
      * @param {*} res 
      */
-    async createPhoto(req, res) {
+    async createPhoto(req, res, next) {
+        try {
+            console.log(`CREATE PHOTO`);  // test
+            const db = req.db;
+
+            console.log(`FILES:::: `, req.files);
+
+            if (!req.files || Object.keys(req.files).length === 0) {
+                console.log(`No file....`); // test
+                return next(ApiError.internal('Нет файла!!!'))
+            }
+
+            const { img } = req.files
+            let fileName = 'flower-' + uuid.v4() + '.jpg'
+            img.mv(path.resolve(__dirname, '..', 'static', 'flower', fileName))
+
+            res.json({ server: 'Загрузка файла', fileName: fileName })
+
+
+        } catch (err) {
+            console.log(`Ошибка при добавлении рисунка: `, err);
+            return next(ApiError.badRequest('Ошибка при добавлении рисунка'))
+        }
 
     }
 
