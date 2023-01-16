@@ -375,7 +375,7 @@
   margin: 10px auto;
 }
 
-.button_panel .btn_panel {
+.btn_panel {
   width: 140px;
   height: 35px;
   margin: 5px 8px;
@@ -390,14 +390,14 @@
   transition: 0.25s;
 }
 
-.button_panel .btn_panel:hover {
+.btn_panel:hover {
   background-color: #779fcb;
   -webkit-transition: 0.25s;
   transition: 0.25s;
   color: #fff;
 }
 
-.button_panel .btn_panel:active {
+.btn_panel:active {
   background-color: #e77f51;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -469,10 +469,36 @@
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  border: 1px solid #ccc;
 }
 
 .new_flower .new_flower_box {
   width: 350px;
   height: 30px;
   margin: 15px 10px;
+}
+
+.placeholder_option {
+  color: #ccc;
+}
+
+.input_file {
+  padding: 10px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.new_flower_box_img {
+  width: 350px;
+  height: 200px;
+  padding: 25px 0 0 0;
+}
+
+.img_flower {
+  width: 200px;
+  height: auto;
+}
+
+.btn_save {
+  margin: 20px auto;
 }

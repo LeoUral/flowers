@@ -1,0 +1,1 @@
+export const URL_IMG_FLOWER = 'http://localhost:5000/flower/'

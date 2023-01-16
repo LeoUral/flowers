@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const SelectString = ({ title, keySelect, arr, doChangeSelect }) => {
+const SelectString = ({ title, keySelect, arr, placeholder, doChangeSelect }) => {
 
     const [select, setSelect] = useState('')
     const [key, setKey] = useState('')
@@ -26,6 +26,9 @@ const SelectString = ({ title, keySelect, arr, doChangeSelect }) => {
                 data-key={keySelect}
                 onChange={handleSelect}
             >
+                <option
+                    className='placeholder_option'
+                > {placeholder} </option>
                 {
                     arr && arr.map((item, index) => {
                         return (
@@ -34,6 +37,7 @@ const SelectString = ({ title, keySelect, arr, doChangeSelect }) => {
                                     {item}
                                 </option>
                             </React.Fragment>
+
                         )
                     })
                 }

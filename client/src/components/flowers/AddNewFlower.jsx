@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable default-case */
 import React from 'react';
 import InputString from '../InputString';
@@ -6,11 +7,15 @@ import getNameFlowers from './getNameFlowers'
 import getManufacturer from './getManufacturer'
 import getGrowth from './getGrowth'
 import getGrade from './getGrade'
+import Flowers from '../server/Flowers';
+import { URL_IMG_FLOWER } from '../variables'
+import saveFlower from './saveFlower';
 
 
 export default class AddNewFlower extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             name: [],
             manufacturer: [],
@@ -26,90 +31,43 @@ export default class AddNewFlower extends React.Component {
                 datePurchase: new Date(),
                 pricePurchase: 0,
                 quantity: 0,
+                archive: false,
             }
+
         }
-        this.getName = this.getName.bind(this)
-        this.getManufacturerFlower = this.getManufacturerFlower.bind(this);
-        this.getGrowthFlower = this.getGrowthFlower.bind(this);
 
         this.doChangeSelect = this.doChangeSelect.bind(this);
+        this.handleChangeFile = this.handleChangeFile.bind(this)
     }
 
-    /**
-     * Загружаем массив названия цветов из DB
-     * @returns {Array} Массив названий
-     */
-    async getName() {
+    handleChangeFile(e) {
+        console.log(`E >>>> `, e.target.files[0]);
+        const file = e.target.files[0];
         try {
-            return (async () => {
-                const result = await getNameFlowers();
-                console.log(`RESULT:::::: `, result); // test
+            (async () => {
+                const formData = new FormData()
+                formData.append('img', file)
 
-                return result
+                const data = await Flowers.createPhoto(formData);
+
+                console.log(`FILE NAME:::: `, data);  // test
+                let flower = this.state.flower;
+                flower.imageFlower = data.fileName;
+                this.setState({ flower: flower });
+
             })()
         } catch (err) {
-            console.log(`ERROR: `, err);
+            console.log(`Ошибка загрузки фото: `, err);
         }
+
     }
-
-    /**
-     * Загружаем массив производителей цветов из DB
-     * @returns {Array} Массив названий
-     */
-    async getManufacturerFlower() {
-        try {
-            return (async () => {
-                const result = await getManufacturer()
-                console.log(`RESULT:::::: `, result); // test
-
-                return result
-            })()
-        } catch (err) {
-            console.log(`ERROR: `, err);
-        }
-    }
-
-    /**
-     * Загружаем массив ростовки цветов
-     * @returns 
-     */
-    async getGrowthFlower() {
-        try {
-            return (async () => {
-                const result = await getGrowth()
-                console.log(`RESULT:::::: `, result); // test
-
-                return result
-            })()
-        } catch (err) {
-            console.log(`ERROR: `, err);
-        }
-    }
-
-    /**
-     * Получаем сорта цветов
-     * @returns 
-     */
-    async getGradeFlower() {
-        try {
-            return (async () => {
-                const result = await getGrade()
-                console.log(`RESULT:::::: `, result); // test
-
-                return result
-            })()
-        } catch (err) {
-            console.log(`ERROR: `, err);
-        }
-    }
-
 
     /**
      * (props) Получаем выбранные данные цветка из массива 
      * @param {Object} obj props from SelectString
      */
     doChangeSelect(obj) {
-        console.log(obj); // test
+        // console.log(obj); // test
 
         const key = obj.key
         let flower = this.state.flower
@@ -118,58 +76,54 @@ export default class AddNewFlower extends React.Component {
             case 'name':
                 flower.name = obj.text
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
 
             case 'manufacturer':
                 flower.manufacturer = obj.text
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
 
             case 'grade':
                 flower.grade = obj.text
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
 
             case 'growth':
                 flower.growth = obj.text
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
 
             case 'price':
                 flower.pricePurchase = Number(obj.text)
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
 
             case 'quantity':
                 flower.quantity = Number(obj.text)
                 this.setState({ flower: flower })
-                setTimeout(() => { console.log(this.state); })
                 break;
         }
     }
 
     async componentDidMount() {
         this.setState({
-            name: await this.getName(),
-            manufacturer: await this.getManufacturerFlower(),
-            grade: await this.getGradeFlower(),
-            growth: await this.getGrowthFlower(),
+            name: await getNameFlowers(),
+            manufacturer: await getManufacturer(),
+            grade: await getGrade(),
+            growth: await getGrowth(),
         })
-
     }
 
     render() {
+        const srcImg = `${URL_IMG_FLOWER}${this.state.flower.imageFlower}`
+        console.log(`srcImg::: `, srcImg);
         return (
             <>
                 <div className='new_flower' >
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Название цветка:'}
+                            placeholder={'название'}
                             keySelect={'name'}
                             arr={this.state.name}
                             doChangeSelect={this.doChangeSelect}
@@ -178,6 +132,7 @@ export default class AddNewFlower extends React.Component {
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Производитель:'}
+                            placeholder={'проиводитель'}
                             keySelect={'manufacturer'}
                             arr={this.state.manufacturer}
                             doChangeSelect={this.doChangeSelect}
@@ -186,6 +141,7 @@ export default class AddNewFlower extends React.Component {
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Сорт:'}
+                            placeholder={'сорт'}
                             keySelect={'grade'}
                             arr={this.state.grade}
                             doChangeSelect={this.doChangeSelect}
@@ -194,6 +150,7 @@ export default class AddNewFlower extends React.Component {
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Рост:'}
+                            placeholder={'рост'}
                             keySelect={'growth'}
                             arr={this.state.growth}
                             doChangeSelect={this.doChangeSelect}
@@ -201,7 +158,7 @@ export default class AddNewFlower extends React.Component {
                     </div>
                     <div className='new_flower_box' >
                         <InputString
-                            title={'Цена закупки'}
+                            title={'Цена закупки, руб.'}
                             placeholder={'цена'}
                             keyInput={'price'}
                             doChangeSelect={this.doChangeSelect}
@@ -215,7 +172,34 @@ export default class AddNewFlower extends React.Component {
                             doChangeSelect={this.doChangeSelect}
                         />
                     </div>
-
+                    <div className='new_flower_box' >
+                        <form
+                            ref='uploadForm'
+                            id='uploadForm'
+                            encType="multipart/form-data"
+                        >
+                            <input
+                                className='input_file'
+                                type='file'
+                                name='img'
+                                onChange={this.handleChangeFile}
+                            />
+                        </form>
+                    </div>
+                    <div className='new_flower_box_img' >
+                        <img
+                            className='img_flower'
+                            src={srcImg}
+                        />
+                    </div>
+                    <div className='new_flower_box' >
+                        <button
+                            className='btn_panel btn_save'
+                            onClick={async () => { await saveFlower(this.state.flower) }}
+                        >
+                            Добавить
+                        </button>
+                    </div>
                 </div>
             </>
         )
