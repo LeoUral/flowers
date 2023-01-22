@@ -6,7 +6,6 @@ const addNameFlower = require('../model/flowers/addNameFlower');
 const getDocument = require('../model/getDocument');
 const path = require('path');
 const uuid = require('uuid');
-const { log } = require('console');
 
 
 class FlowersController {
