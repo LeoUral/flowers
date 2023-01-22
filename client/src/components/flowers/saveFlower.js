@@ -7,6 +7,19 @@ import Flowers from '../server/Flowers';
 const saveFlower = async (flower) => {
     try {
         (async () => {
+
+            if (
+                !flower.name ||
+                !flower.manufacturer ||
+                !flower.grade ||
+                !flower.growth ||
+                !flower.pricePurchase ||
+                !flower.quantity
+            ) {
+                console.log(`ERROR: Не все данные введены!!!`);
+                throw new Error('Не все данные введены!!!')
+            }
+
             const result = await Flowers.createFlower(flower);
             console.log(`RESULT:::: `, result); // test
         })()

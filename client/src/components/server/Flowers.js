@@ -237,5 +237,162 @@ class Flowers {
         }
     }
 
+    /**
+     * Добавление позиции названия цветка
+     * @param {String} data 
+     * @returns 
+     */
+    async addName(data) {
+
+        if (!await doCheck()) {
+            throw new Error('Нет авторизации')
+        }
+        try {
+            const url = `${this.URL}${PORT}/api/flowers/create_name`
+            const userBody = {
+                name: data,
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userBody)
+            })
+
+            const result = await response.json();
+
+            if (result.messageError) {
+                console.log(`>>> result ERROR: `, result.messageError);
+                throw new Error(result.messageError)
+            }
+
+            return result.result.data;
+
+        } catch (err) {
+            console.log(`ОШИБКА: `, err);
+            return { messageError: err.message }
+        }
+    }
+
+    /**
+     * Добавление производителя в базу
+     * @param {String} data 
+     * @returns 
+     */
+    async addManufacturer(data) {
+
+        if (!await doCheck()) {
+            throw new Error('Нет авторизации')
+        }
+        try {
+            const url = `${this.URL}${PORT}/api/flowers/create_manufacturer`
+            const userBody = {
+                manufacturer: data,
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userBody)
+            })
+
+            const result = await response.json();
+
+            if (result.messageError) {
+                console.log(`>>> result ERROR: `, result.messageError);
+                throw new Error(result.messageError)
+            }
+
+            return result.result.data;
+
+        } catch (err) {
+            console.log(`ОШИБКА: `, err);
+            return { messageError: err.message }
+        }
+    }
+
+
+    /**
+     * Добавление позиции сорта в базу
+     * @param {String} data 
+     * @returns 
+     */
+    async addGrade(data) {
+
+        if (!await doCheck()) {
+            throw new Error('Нет авторизации')
+        }
+        try {
+            const url = `${this.URL}${PORT}/api/flowers/create_grade`
+            const userBody = {
+                grade: data,
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userBody)
+            })
+
+            const result = await response.json();
+
+            if (result.messageError) {
+                console.log(`>>> result ERROR: `, result.messageError);
+                throw new Error(result.messageError)
+            }
+
+            return result.result.data;
+
+        } catch (err) {
+            console.log(`ОШИБКА: `, err);
+            return { messageError: err.message }
+        }
+    }
+
+    /**
+     * Добавление позиции ростовки цветка
+     * @param {*} data 
+     * @returns 
+     */
+    async addGrowth(data) {
+
+        if (!await doCheck()) {
+            throw new Error('Нет авторизации')
+        }
+        try {
+            const url = `${this.URL}${PORT}/api/flowers/create_growth`
+            const userBody = {
+                growth: data,
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userBody)
+            })
+
+            const result = await response.json();
+
+            if (result.messageError) {
+                console.log(`>>> result ERROR: `, result.messageError);
+                throw new Error(result.messageError)
+            }
+
+            return result.result.data;
+
+        } catch (err) {
+            console.log(`ОШИБКА: `, err);
+            return { messageError: err.message }
+        }
+    }
+
 }
 export default new Flowers();

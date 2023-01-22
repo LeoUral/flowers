@@ -10,6 +10,7 @@ import getGrade from './getGrade'
 import Flowers from '../server/Flowers';
 import { URL_IMG_FLOWER } from '../variables'
 import saveFlower from './saveFlower';
+import ModalAddPosition from './ModalAddPosition';
 
 
 export default class AddNewFlower extends React.Component {
@@ -22,6 +23,10 @@ export default class AddNewFlower extends React.Component {
             grade: [],
             growth: [],
             imageFlower: [],
+            show: true,
+            showModalAdd: false,
+            dataSet: 'null', // collection
+            dataValue: '', // value
             flower: {
                 name: '',
                 manufacturer: '',
@@ -37,7 +42,72 @@ export default class AddNewFlower extends React.Component {
         }
 
         this.doChangeSelect = this.doChangeSelect.bind(this);
-        this.handleChangeFile = this.handleChangeFile.bind(this)
+        this.handleChangeFile = this.handleChangeFile.bind(this);
+        this.doChangeInputPosition = this.doChangeInputPosition.bind(this);
+        this.handleClickAdd = this.handleClickAdd.bind(this);
+        this.addNewPosition = this.addNewPosition.bind(this);
+        this.loadDataBase = this.loadDataBase.bind(this);
+    }
+
+    async addNewPosition(collection, data) {
+        try {
+            (async () => {
+                switch (collection) {
+                    case 'name':
+                        await Flowers.addName(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
+
+                    case 'manufacturer':
+                        await Flowers.addManufacturer(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
+
+                    case 'grade':
+                        await Flowers.addGrade(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
+
+                    case 'growth':
+                        await Flowers.addGrowth(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
+
+                }
+            })()
+        } catch (err) {
+            console.log(`Ошибка записи позиции в базу`);
+        }
+
+    }
+
+    handleClickAdd(e) {
+        this.setState({
+            showModalAdd: true,
+            dataSet: e.target.dataset.click,
+        })
+
+    }
+
+    doChangeInputPosition(e) {
+
+        if (e.target.dataset.change === 'button_add') {
+            console.log(`click ADD`); // test
+            console.log(`collection::: `, this.state.dataSet);
+            console.log(`VALUE::: `, this.state.dataValue);
+
+            // todo: Запустить добавление новой позиции
+            this.addNewPosition(this.state.dataSet, this.state.dataValue)
+
+        } else {
+            this.setState({ dataValue: e.target.value })
+        }
+
+
     }
 
     handleChangeFile(e) {
@@ -105,7 +175,7 @@ export default class AddNewFlower extends React.Component {
         }
     }
 
-    async componentDidMount() {
+    async loadDataBase() {
         this.setState({
             name: await getNameFlowers(),
             manufacturer: await getManufacturer(),
@@ -114,12 +184,23 @@ export default class AddNewFlower extends React.Component {
         })
     }
 
+    async componentDidMount() {
+        await this.loadDataBase();
+    }
+
     render() {
         const srcImg = `${URL_IMG_FLOWER}${this.state.flower.imageFlower}`
-        console.log(`srcImg::: `, srcImg);
+        // console.log(`srcImg::: `, srcImg); // test
         return (
             <>
-                <div className='new_flower' >
+                {this.state.showModalAdd && <ModalAddPosition
+                    nameHeader={'NAME'}
+                    doChange={this.doChangeInputPosition}
+                    dataSet={this.state.dataSet}
+                    doClickClose={() => { this.setState({ showModalAdd: false }) }}
+                />}
+
+                {this.state.show && <div className='new_flower' >
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Название цветка:'}
@@ -128,7 +209,17 @@ export default class AddNewFlower extends React.Component {
                             arr={this.state.name}
                             doChangeSelect={this.doChangeSelect}
                         />
+                        <div className='new_flower_box_btn' >
+                            <button
+                                className='btn_panel btn_save'
+                                data-click='name'
+                                onClick={this.handleClickAdd}
+                            >
+                                + название
+                            </button>
+                        </div>
                     </div>
+
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Производитель:'}
@@ -137,7 +228,19 @@ export default class AddNewFlower extends React.Component {
                             arr={this.state.manufacturer}
                             doChangeSelect={this.doChangeSelect}
                         />
+
+                        <div className='new_flower_box_btn' >
+                            <button
+                                className='btn_panel btn_save'
+                                data-click='manufacturer'
+                                onClick={this.handleClickAdd}
+                            >
+                                + производитель
+                            </button>
+                        </div>
                     </div>
+
+
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Сорт:'}
@@ -146,7 +249,19 @@ export default class AddNewFlower extends React.Component {
                             arr={this.state.grade}
                             doChangeSelect={this.doChangeSelect}
                         />
+                        <div className='new_flower_box_btn' >
+                            <button
+                                className='btn_panel btn_save'
+                                data-click='grade'
+                                onClick={this.handleClickAdd}
+                            >
+                                + сорт
+                            </button>
+                        </div>
+
                     </div>
+
+
                     <div className='new_flower_box' >
                         <SelectString
                             title={'Рост:'}
@@ -155,7 +270,19 @@ export default class AddNewFlower extends React.Component {
                             arr={this.state.growth}
                             doChangeSelect={this.doChangeSelect}
                         />
+                        <div className='new_flower_box_btn' >
+                            <button
+                                className='btn_panel btn_save'
+                                data-click='growth'
+                                onClick={this.handleClickAdd}
+                            >
+                                + рост
+                            </button>
+                        </div>
+
+
                     </div>
+
                     <div className='new_flower_box' >
                         <InputString
                             title={'Цена закупки, руб.'}
@@ -200,7 +327,7 @@ export default class AddNewFlower extends React.Component {
                             Добавить
                         </button>
                     </div>
-                </div>
+                </div>}
             </>
         )
     }
