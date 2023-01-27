@@ -19,7 +19,9 @@ export default class Flowers extends React.Component {
         this.doDeleteCut = this.doDeleteCut.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
-
+    /**
+     * Закрытие модалки
+     */
     closeModal() {
         this.setState({ showCut: false })
     }
