@@ -306,13 +306,34 @@ class FlowersController {
     }
 
     /**
-     * Получение всех позиций цветов
+     * Получение всех позиций цветов, срезки
      * @param {*} req 
      * @param {*} res 
      */
     async getAll(req, res) {
+        // const { collection, document } = req.body
+        const db = req.db;
 
-        res.json('flowers all')
+        try {
+            (async () => {
+                const result = await db.collection('cut')
+                    .find({}).toArray()
+
+                if (result?.status === 400) {
+                    console.log(`result: `, result); // test
+                    return next(ApiError.internal('Ошибка получения массива срезки цветов'))
+                }
+
+                res.json({ server: 'Массив срезки цветов', result: result })
+            })()
+
+        } catch (err) {
+            console.log(`Ошибка получения массива срезки цветков: `, err);
+            return next(ApiError.internal('Ошибка получения массива срезки цветов'))
+        }
+
+
+
     }
 
     /**
