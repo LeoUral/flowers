@@ -394,5 +394,44 @@ class Flowers {
         }
     }
 
+    /**
+     * Получить всю срезку цветов
+     * @returns 
+     */
+    async getAllCut() {
+
+        if (!await doCheck()) {
+            throw new Error('Нет авторизации')
+        }
+        try {
+            const url = `${this.URL}${PORT}/api/flowers/get_all`
+            const userBody = {
+
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userBody)
+            })
+
+            const result = await response.json();
+
+            if (result.messageError) {
+                console.log(`>>> result ERROR: `, result.messageError);
+                throw new Error(result.messageError)
+            }
+
+            console.log(`result cut:::: `, result); // test
+            return result;
+
+        } catch (err) {
+            console.log(`ОШИБКА: `, err);
+            return { messageError: err.message }
+        }
+    }
+
 }
 export default new Flowers();

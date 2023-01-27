@@ -18,8 +18,8 @@
 .modal .shadow {
   width: 100%;
   height: 100%;
-  background-color: #aaa;
-  position: absolute;
+  background-color: #000;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
@@ -147,6 +147,14 @@
           box-sizing: border-box;
 }
 
+.shadow-cut {
+  opacity: 0.5;
+}
+
+.modal-fixed {
+  position: fixed;
+}
+
 .box_flex {
   width: 100%;
   display: -webkit-box;
@@ -237,8 +245,8 @@
   background-color: #779fcb;
   border: none;
   border-radius: 5px;
-  -webkit-box-shadow: 5px 5px 10px #aaa;
-          box-shadow: 5px 5px 10px #aaa;
+  -webkit-box-shadow: 5px 5px 10px #000;
+          box-shadow: 5px 5px 10px #000;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   cursor: pointer;
@@ -432,6 +440,28 @@
   text-align: center;
 }
 
+.table_all .table_all_body .table_all_tr .table_all_td_point-flowers {
+  width: 100px;
+  text-align: center;
+}
+
+.table_all_tr:hover {
+  background-color: #779fcb;
+}
+
+.table-hover:hover {
+  background-color: #2f548b;
+  color: #fff;
+}
+
+.table-hover2:hover {
+  background-color: #e77f51;
+}
+
+.table-point {
+  cursor: pointer;
+}
+
 .input_string {
   width: 280px;
   height: 30px;
@@ -511,7 +541,7 @@
 .modal_add .shadow_add {
   width: 100%;
   height: 100%;
-  background-color: #aaa;
+  background-color: #000;
   position: absolute;
   top: 0;
   left: 0;
