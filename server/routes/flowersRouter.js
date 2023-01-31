@@ -15,7 +15,7 @@ router.post('/get_name', flowersController.getName)
 router.post('/get_photo', flowersController.getPhoto)
 router.post('/update', flowersController.update)
 router.post('/get_all', flowersController.getAll)
-router.get('/get_one', flowersController.getOne)
+router.post('/get_one', flowersController.getOne)
 router.post('/delete', flowersController.deleteOne)
 
 

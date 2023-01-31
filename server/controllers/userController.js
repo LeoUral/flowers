@@ -151,7 +151,7 @@ class UserController {
 
                 // проверяем пользователя на наличие действующей сессси
                 const result = await checkSessionData(db, login, sessionId)
-                console.log(`RESULT SESSION::: `, result); // test
+                { result ? '' : console.log(`RESULT SESSION access::: `, result) }
 
                 res.json({ session: result })
             })()

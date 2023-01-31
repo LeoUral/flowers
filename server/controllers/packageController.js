@@ -50,8 +50,29 @@ class PackageController {
      * @param {*} req 
      * @param {*} res 
      */
-    async createPhoto(req, res) {
+    async createPhoto(req, res, next) {
+        try {
+            console.log(`CREATE PHOTO`);  // test
+            const db = req.db;
 
+            console.log(`FILES:::: `, req.files);
+
+            if (!req.files || Object.keys(req.files).length === 0) {
+                console.log(`No file....`); // test
+                return next(ApiError.internal('Нет файла!!!'))
+            }
+
+            const { img } = req.files
+            let fileName = 'package-' + uuid.v4() + '.jpg'
+            img.mv(path.resolve(__dirname, '..', 'static', 'package', fileName))
+
+            res.json({ server: 'Загрузка файла', fileName: fileName })
+
+
+        } catch (err) {
+            console.log(`Ошибка при добавлении рисунка: `, err);
+            return next(ApiError.badRequest('Ошибка при добавлении рисунка'))
+        }
     }
 
 

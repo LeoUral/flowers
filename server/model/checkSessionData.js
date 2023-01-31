@@ -17,15 +17,17 @@ module.exports = async (db, login, sessionId) => {
         return (async () => {
             const result = await db.collection('users')
                 .findOne({ _id: 'sessions' })
-            console.log(`TIMER::::: `, (result[login]?.time - (Date.now() - 1000 * 60 * timer))); // test
+            // console.log(`TIMER::::: `, (result[login]?.time - (Date.now() - 1000 * 60 * timer))); // test
 
             if ((result[login]?.time - (Date.now() - 1000 * 60 * timer)) < 0) {
                 console.log(`Время сессии закончилось!`); // test
             }
 
             if (
-                result[login]?.sessionId === sessionId &&
-                result[login]?.time > (Date.now() - 1000 * 60 * timer)
+                (result[login]?.sessionId === sessionId &&
+                    result[login]?.time > (Date.now() - 1000 * 60 * timer)) ||
+                (result[login]?.sessionId === sessionId &&
+                    login === 'Admin')
             ) {
                 return true
             } else {

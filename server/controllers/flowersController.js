@@ -31,7 +31,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка при добавлении новой позиции цветка: `, err);
-            return next(ApiError.internal('Ошибка при добавлении новой позиции цветка'))
+            return next(ApiError.badRequest('Ошибка при добавлении новой позиции цветка'))
         }
     }
 
@@ -51,14 +51,14 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка добавления новго названия цветка, навазние не указано (addNameFlower.js)'))
+                    return next(ApiError.badRequest('Ошибка добавления новго названия цветка, навазние не указано (addNameFlower.js)'))
                 }
 
                 res.json({ server: 'Название цветка добавлено', name: name })
             })()
         } catch (err) {
             console.log(`Ошибка при добавлении названия цветка: `, err);
-            return next(ApiError.internal('Ошибка при добавлении названия цветка'))
+            return next(ApiError.badRequest('Ошибка при добавлении названия цветка'))
         }
 
     }
@@ -79,14 +79,14 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка добавления новго производителя цветка, не указан производитель (addManufacturer.js)'))
+                    return next(ApiError.badRequest('Ошибка добавления новго производителя цветка, не указан производитель (addManufacturer.js)'))
                 }
 
                 res.json({ server: 'Название производителя добавлено', manufacturer: manufacturer })
             })()
         } catch (err) {
             console.log(`Ошибка при добавлении названия цветка: `, err);
-            return next(ApiError.internal('Ошибка при добавлении названия цветка'))
+            return next(ApiError.badRequest('Ошибка при добавлении названия цветка'))
         }
     }
 
@@ -106,7 +106,7 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка добавления новго сорта цветка, не указан сорт (addGrade.js)'))
+                    return next(ApiError.badRequest('Ошибка добавления новго сорта цветка, не указан сорт (addGrade.js)'))
                 }
 
                 res.json({ server: 'Сорт цветка добавлен', grade: grade })
@@ -114,7 +114,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка при добавлении сорта цветка: `, err);
-            return next(ApiError.internal('Ошибка при добавлении сорта цветка'))
+            return next(ApiError.badRequest('Ошибка при добавлении сорта цветка'))
         }
 
     }
@@ -135,7 +135,7 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка добавления новой ростовки цветка, не указана ростовка (addGrowth.js)'))
+                    return next(ApiError.badRequest('Ошибка добавления новой ростовки цветка, не указана ростовка (addGrowth.js)'))
                 }
 
                 res.json({ server: 'Ростовка цветка добавлена', growth: growth })
@@ -143,7 +143,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка при добавлении ростовки цветка: `, err);
-            return next(ApiError.internal('Ошибка при добавлении ростовки цветка'))
+            return next(ApiError.badRequest('Ошибка при добавлении ростовки цветка'))
         }
     }
 
@@ -193,7 +193,7 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка получения массива сорта цветов'))
+                    return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
                 }
 
                 res.json({ server: 'Массив сорта цветов', result: result })
@@ -201,7 +201,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка получения массива сорта цветков: `, err);
-            return next(ApiError.internal('Ошибка получения массива сорта цветов'))
+            return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
         }
     }
 
@@ -220,7 +220,7 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка получения массива ростовки цветов'))
+                    return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
                 }
 
                 res.json({ server: 'Массив ростовки цветов', result: result })
@@ -228,7 +228,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка получения массива ростовки цветков: `, err);
-            return next(ApiError.internal('Ошибка получения массива ростовки цветов'))
+            return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
         }
     }
 
@@ -247,7 +247,7 @@ class FlowersController {
 
                 if (result?.status === 400) {
                     console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка получения массива производителя цветов'))
+                    return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
                 }
 
                 res.json({ server: 'Массив производителя цветов', result: result })
@@ -255,7 +255,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка получения массива производителя цветков: `, err);
-            return next(ApiError.internal('Ошибка получения массива производителя цветов'))
+            return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
         }
     }
 
@@ -282,7 +282,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка получения массива названия цветков: `, err);
-            return next(ApiError.internal('Ошибка получения массива названия цветов'))
+            return next(ApiError.badRequest('Ошибка получения массива названия цветов'))
         }
 
     }
@@ -329,7 +329,7 @@ class FlowersController {
 
         } catch (err) {
             console.log(`Ошибка получения массива срезки цветков: `, err);
-            return next(ApiError.internal('Ошибка получения массива срезки цветов'))
+            return next(ApiError.badRequest('Ошибка получения массива срезки цветов'))
         }
 
 
@@ -347,12 +347,26 @@ class FlowersController {
     }
 
     /**
-     * Удаление выбранной позиции цветка
+     * Удаление выбранной позиции цветка,
+     * поле archive переводим в true
      * @param {*} req 
      * @param {*} res 
      */
-    async deleteOne(req, res) {
+    async deleteOne(req, res, next) {
+        try {
+            const db = req.db
+            const { id } = req.body
+            console.log(`body:::: `, id); // test
+            (async () => {
+                const result = await db.collection('cut')
+                    .updateOne({ _id: id }, { $set: { 'data.archive': true } })
 
+                res.json({ delete: 'OK' })
+            })()
+        } catch (err) {
+            console.log(`Ошибка при перемещении в архив срезки цветков: `, err);
+            return next(ApiError.badRequest('Ошибка при перемещении в архив срезки цветков'))
+        }
     }
 }
 
