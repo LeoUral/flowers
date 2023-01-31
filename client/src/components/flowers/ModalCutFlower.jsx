@@ -5,7 +5,7 @@ import { URL_IMG_FLOWER } from '../variables'
 
 const ModalCutFlower = ({ textHeader, textFooter, closeModal, cutDataFlower }) => {
 
-    console.log(`cutDataFlower::: `, cutDataFlower); // test
+    // console.log(`cutDataFlower::: `, cutDataFlower); // test
 
     const imgSrc = `${URL_IMG_FLOWER}${cutDataFlower.data.imageFlower}`
 

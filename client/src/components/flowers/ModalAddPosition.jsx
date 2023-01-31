@@ -1,7 +1,11 @@
 import React from 'react'
 import InputPosition from './InputPosition';
 
-
+/**
+ * Модальное окно для сохранения новой позиции для срезки
+ * @param {*} param0 
+ * @returns 
+ */
 const ModalAddPosition = ({ nameHeader, dataSet, doChange, doClickClose }) => {
 
     return (

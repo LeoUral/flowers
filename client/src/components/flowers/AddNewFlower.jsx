@@ -11,6 +11,7 @@ import Flowers from '../server/Flowers';
 import { URL_IMG_FLOWER } from '../variables'
 import saveFlower from './saveFlower';
 import ModalAddPosition from './ModalAddPosition';
+import SaveImage from '../SaveImage';
 
 
 export default class AddNewFlower extends React.Component {
@@ -49,6 +50,11 @@ export default class AddNewFlower extends React.Component {
         this.loadDataBase = this.loadDataBase.bind(this);
     }
 
+    /**
+     * Добавление и сохранение новой позиции по разделам
+     * @param {*} collection 
+     * @param {*} data 
+     */
     async addNewPosition(collection, data) {
         try {
             (async () => {
@@ -85,6 +91,10 @@ export default class AddNewFlower extends React.Component {
 
     }
 
+    /**
+     * открытие модалки - сохранение новой позицииs
+     * @param {*} e 
+     */
     handleClickAdd(e) {
         this.setState({
             showModalAdd: true,
@@ -93,6 +103,10 @@ export default class AddNewFlower extends React.Component {
 
     }
 
+    /**
+     * Добавление новой позиции
+     * @param {*} e 
+     */
     doChangeInputPosition(e) {
 
         if (e.target.dataset.change === 'button_add') {
@@ -100,7 +114,7 @@ export default class AddNewFlower extends React.Component {
             console.log(`collection::: `, this.state.dataSet);
             console.log(`VALUE::: `, this.state.dataValue);
 
-            // todo: Запустить добавление новой позиции
+            // *: Запустить добавление новой позиции
             this.addNewPosition(this.state.dataSet, this.state.dataValue)
 
         } else {
@@ -110,6 +124,10 @@ export default class AddNewFlower extends React.Component {
 
     }
 
+    /**
+     * сохранение рисунка
+     * @param {*} e 
+     */
     handleChangeFile(e) {
         console.log(`E >>>> `, e.target.files[0]);
         const file = e.target.files[0];
@@ -175,6 +193,9 @@ export default class AddNewFlower extends React.Component {
         }
     }
 
+    /**
+     * Загрузка позиций цветка, срезки
+     */
     async loadDataBase() {
         this.setState({
             name: await getNameFlowers(),
@@ -194,7 +215,7 @@ export default class AddNewFlower extends React.Component {
         return (
             <>
                 {this.state.showModalAdd && <ModalAddPosition
-                    nameHeader={'NAME'}
+                    nameHeader={this.state.dataSet}
                     doChange={this.doChangeInputPosition}
                     dataSet={this.state.dataSet}
                     doClickClose={() => { this.setState({ showModalAdd: false }) }}
@@ -299,26 +320,12 @@ export default class AddNewFlower extends React.Component {
                             doChangeSelect={this.doChangeSelect}
                         />
                     </div>
-                    <div className='new_flower_box' >
-                        <form
-                            ref='uploadForm'
-                            id='uploadForm'
-                            encType="multipart/form-data"
-                        >
-                            <input
-                                className='input_file'
-                                type='file'
-                                name='img'
-                                onChange={this.handleChangeFile}
-                            />
-                        </form>
-                    </div>
-                    <div className='new_flower_box_img' >
-                        <img
-                            className='img_flower'
-                            src={srcImg}
-                        />
-                    </div>
+
+                    <SaveImage
+                        handleChangeFile={this.handleChangeFile}
+                        srcImg={srcImg}
+                    />
+
                     <div className='new_flower_box' >
                         <button
                             className='btn_panel btn_save'

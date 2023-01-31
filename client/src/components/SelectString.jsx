@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * Компонент выбора одного значения из массива занчений SELECT
+ * @param {String} title заглавие
+ * @param {String} keySelect ключ компонента - возвращается в объекте
+ * @param {Array} arr массив занчений
+ * @param {String} placeholder placeholder подпись в позиции
+ * @returns {Function} doChangeSelect { key: key, text: select }
+ */
 const SelectString = ({ title, keySelect, arr, placeholder, doChangeSelect }) => {
 
     const [select, setSelect] = useState('')

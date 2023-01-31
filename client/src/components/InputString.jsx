@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+/**
+ * Компонент ввода значения INPUT
+ * @param {String} title заглавие
+ * @param {String} placeholder placeholder подпись в строке
+ * @param {String} keyInput ключ компонента - возвращается в объекте
+ * @returns {Object} doChangeSelect {key: keyText, text: text}
+ */
 const InputString = ({ title, placeholder, keyInput, doChangeSelect }) => {
 
     const [text, setText] = useState('');

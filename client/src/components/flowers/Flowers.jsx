@@ -30,8 +30,15 @@ export default class Flowers extends React.Component {
      * Помещаем в архив выбранную срезку
      * @param {*} e 
      */
-    doDeleteCut(e) {
-        console.log(`DELETE :::::: `, e); // test
+    async doDeleteCut(e) {
+        (async () => {
+            console.log(`DELETE :::::: `, e); // test
+            const resultDel = await Flower.deleteCutOne(e)
+
+            console.log(`server: `, resultDel); // test
+            await this.getAllCutFlowers()
+        })()
+
     }
 
     /**
@@ -55,7 +62,7 @@ export default class Flowers extends React.Component {
     async getAllCutFlowers() {
         try {
             (async () => {
-                // todo: Получить с базы всю срезку для формирования таблицы
+                // *: Получить с базы всю срезку для формирования таблицы
                 const resultAllCut = await Flower.getAllCut();
                 this.setState({ cut: resultAllCut.result });
 
