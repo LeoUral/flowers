@@ -1,4 +1,5 @@
 import React from 'react'
+import AddNewPackage from './AddNewPackage';
 
 export default class Package extends React.Component {
     constructor(props) {
@@ -17,7 +18,9 @@ export default class Package extends React.Component {
             <>
                 <div>
                     PACKAGE COMPONENT
+                    <AddNewPackage />
                 </div>
+
             </>
         )
     }

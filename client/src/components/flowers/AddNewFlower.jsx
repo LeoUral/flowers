@@ -330,7 +330,7 @@ export default class AddNewFlower extends React.Component {
                         <button
                             className='btn_panel btn_save'
                             onClick={async () => {
-                                await saveFlower(this.state.flower)
+                                await saveFlower(this.state.flower);
                                 this.props.newFlower()
                             }}
                         >
