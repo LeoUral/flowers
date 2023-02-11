@@ -46,16 +46,15 @@ class FlowersController {
         const name = req.body.name;
         const db = req.db;
         try {
-            (async () => {
-                const result = await addNameFlower(db, name)
+            const result = await addNameFlower(db, name)
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка добавления новго названия цветка, навазние не указано (addNameFlower.js)'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления новго названия цветка, навазние не указано (addNameFlower.js)'))
+            }
 
-                res.json({ server: 'Название цветка добавлено', name: name })
-            })()
+            res.json({ server: 'Название цветка добавлено', name: name })
+
         } catch (err) {
             console.log(`Ошибка при добавлении названия цветка: `, err);
             return next(ApiError.badRequest('Ошибка при добавлении названия цветка'))
@@ -74,16 +73,15 @@ class FlowersController {
         const manufacturer = req.body.manufacturer;
         const db = req.db;
         try {
-            (async () => {
-                const result = await addManufacturer(db, manufacturer);
+            const result = await addManufacturer(db, manufacturer);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка добавления новго производителя цветка, не указан производитель (addManufacturer.js)'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления новго производителя цветка, не указан производитель (addManufacturer.js)'))
+            }
 
-                res.json({ server: 'Название производителя добавлено', manufacturer: manufacturer })
-            })()
+            res.json({ server: 'Название производителя добавлено', manufacturer: manufacturer })
+
         } catch (err) {
             console.log(`Ошибка при добавлении названия цветка: `, err);
             return next(ApiError.badRequest('Ошибка при добавлении названия цветка'))
@@ -101,16 +99,14 @@ class FlowersController {
         const grade = req.body.grade;
         const db = req.db;
         try {
-            (async () => {
-                const result = await addGrade(db, grade)
+            const result = await addGrade(db, grade)
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка добавления новго сорта цветка, не указан сорт (addGrade.js)'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления новго сорта цветка, не указан сорт (addGrade.js)'))
+            }
 
-                res.json({ server: 'Сорт цветка добавлен', grade: grade })
-            })()
+            res.json({ server: 'Сорт цветка добавлен', grade: grade })
 
         } catch (err) {
             console.log(`Ошибка при добавлении сорта цветка: `, err);
@@ -130,16 +126,14 @@ class FlowersController {
         const growth = req.body.growth;
         const db = req.db;
         try {
-            (async () => {
-                const result = await addGrowth(db, growth);
+            const result = await addGrowth(db, growth);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка добавления новой ростовки цветка, не указана ростовка (addGrowth.js)'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления новой ростовки цветка, не указана ростовка (addGrowth.js)'))
+            }
 
-                res.json({ server: 'Ростовка цветка добавлена', growth: growth })
-            })()
+            res.json({ server: 'Ростовка цветка добавлена', growth: growth })
 
         } catch (err) {
             console.log(`Ошибка при добавлении ростовки цветка: `, err);
@@ -188,16 +182,14 @@ class FlowersController {
         const db = req.db;
 
         try {
-            (async () => {
-                const result = await getDocument(db, collection, document);
+            const result = await getDocument(db, collection, document);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
+            }
 
-                res.json({ server: 'Массив сорта цветов', result: result })
-            })()
+            res.json({ server: 'Массив сорта цветов', result: result })
 
         } catch (err) {
             console.log(`Ошибка получения массива сорта цветков: `, err);
@@ -215,16 +207,14 @@ class FlowersController {
         const db = req.db;
 
         try {
-            (async () => {
-                const result = await getDocument(db, collection, document);
+            const result = await getDocument(db, collection, document);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
+            }
 
-                res.json({ server: 'Массив ростовки цветов', result: result })
-            })()
+            res.json({ server: 'Массив ростовки цветов', result: result })
 
         } catch (err) {
             console.log(`Ошибка получения массива ростовки цветков: `, err);
@@ -242,16 +232,14 @@ class FlowersController {
         const db = req.db;
 
         try {
-            (async () => {
-                const result = await getDocument(db, collection, document);
+            const result = await getDocument(db, collection, document);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
+            }
 
-                res.json({ server: 'Массив производителя цветов', result: result })
-            })()
+            res.json({ server: 'Массив производителя цветов', result: result })
 
         } catch (err) {
             console.log(`Ошибка получения массива производителя цветков: `, err);
@@ -269,16 +257,14 @@ class FlowersController {
         const db = req.db;
 
         try {
-            (async () => {
-                const result = await getDocument(db, collection, document);
+            const result = await getDocument(db, collection, document);
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка получения массива названия цветов'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.internal('Ошибка получения массива названия цветов'))
+            }
 
-                res.json({ server: 'Массив названия цветов', result: result })
-            })()
+            res.json({ server: 'Массив названия цветов', result: result })
 
         } catch (err) {
             console.log(`Ошибка получения массива названия цветков: `, err);
@@ -315,17 +301,15 @@ class FlowersController {
         const db = req.db;
 
         try {
-            (async () => {
-                const result = await db.collection('cut')
-                    .find({}).toArray()
+            const result = await db.collection('cut')
+                .find({}).toArray()
 
-                if (result?.status === 400) {
-                    console.log(`result: `, result); // test
-                    return next(ApiError.internal('Ошибка получения массива срезки цветов'))
-                }
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.internal('Ошибка получения массива срезки цветов'))
+            }
 
-                res.json({ server: 'Массив срезки цветов', result: result })
-            })()
+            res.json({ server: 'Массив срезки цветов', result: result })
 
         } catch (err) {
             console.log(`Ошибка получения массива срезки цветков: `, err);
@@ -357,12 +341,12 @@ class FlowersController {
             const db = req.db
             const { id } = req.body
             console.log(`body:::: `, id); // test
-            (async () => {
-                const result = await db.collection('cut')
-                    .updateOne({ _id: id }, { $set: { 'data.archive': true } })
 
-                res.json({ delete: 'OK' })
-            })()
+            const result = await db.collection('cut')
+                .updateOne({ _id: id }, { $set: { 'data.archive': true } })
+
+            res.json({ delete: 'OK' })
+
         } catch (err) {
             console.log(`Ошибка при перемещении в архив срезки цветков: `, err);
             return next(ApiError.badRequest('Ошибка при перемещении в архив срезки цветков'))

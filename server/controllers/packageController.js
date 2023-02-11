@@ -1,3 +1,13 @@
+const ApiError = require('../error/ApiError');
+const path = require('path');
+const uuid = require('uuid');
+const addGroup = require('../model/package/addGroup');
+const addType = require('../model/package/addType');
+const addColor = require('../model/package/addColor');
+const addUnits = require('../model/package/addUnits');
+const getDocument = require('../model/getDocument');
+
+
 class PackageController {
 
     /**
@@ -13,8 +23,26 @@ class PackageController {
      * Добавление группы упаковок и расходников
      * @param {*} req 
      * @param {*} res 
+     * @param {*} next
+     * @returns {*} void
      */
-    async createGroup(req, res) {
+    async createGroup(req, res, next) {
+        const group = req.body.group;
+        const db = req.db;
+        try {
+            const result = await addGroup(db, group);
+
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления новой группы в упаковке (packageController.js)'))
+            }
+
+            res.json({ server: 'Группа добавлена', group: group })
+
+        } catch (err) {
+            console.log(`Ошибка добавления новой группы: `, err);
+            return next(ApiError.badRequest('Ошибка добавления новой группы'))
+        }
 
     }
 
@@ -22,18 +50,52 @@ class PackageController {
      * Добавление типа упаковки и расходников
      * @param {*} req 
      * @param {*} res 
+     * @param {*} next
+     * @returns {*} void
      */
-    async createType(req, res) {
+    async createType(req, res, next) {
+        const type = req.body.type;
+        const db = req.db;
+        try {
+            const result = await addType(db, type);
 
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления нового типа упаковки (packageController.js)'))
+            }
+
+            res.json({ server: 'Тип добавлен', type: type })
+
+        } catch (err) {
+            console.log(`Ошибка добавления нового типа: `, err);
+            return next(ApiError.badRequest('Ошибка добавления нового типа'))
+        }
     }
 
     /**
      * Добавлене цвета упаковки и расходников
      * @param {*} req 
      * @param {*} res 
+     * @param {*} next
+     * @returns {*} void
      */
     async createColor(req, res) {
+        const color = req.body.color;
+        const db = req.db;
+        try {
+            const result = await addColor(db, color);
 
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления нового цвета (packageController.js)'))
+            }
+
+            res.json({ server: 'Цвет добавлен', color: color })
+
+        } catch (err) {
+            console.log(`Ошибка добавления нового цвета: `, err);
+            return next(ApiError.badRequest('Ошибка добавления нового цвета'))
+        }
     }
 
     /**
@@ -42,7 +104,22 @@ class PackageController {
      * @param {*} res 
      */
     async createUnits(req, res) {
+        const units = req.body.units;
+        const db = req.db;
+        try {
+            const result = await addUnits(db, units);
 
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest('Ошибка добавления единицы измерения (packageController.js)'))
+            }
+
+            res.json({ server: 'Цвет добавлен', units: units })
+
+        } catch (err) {
+            console.log(`Ошибка добавления единицы измерения: `, err);
+            return next(ApiError.badRequest('Ошибка добавления единицы измерения'))
+        }
     }
 
     /**
@@ -100,8 +177,24 @@ class PackageController {
      * @param {*} res 
      */
     async getOne(req, res) {
+        const { collection, document } = req.body
+        const db = req.db;
 
-        res.json('package controller -> getOne')
+        try {
+            const result = await getDocument(db, collection, document);
+
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest(`Ошибка получения массива: ${document}`))
+            }
+
+            res.json({ server: `Массив ${document}`, result: result })
+
+        } catch (err) {
+            console.log(`Ошибка получения массива ${document}: `, err);
+            return next(ApiError.badRequest(`Ошибка получения массива ${document}`))
+        }
+
     }
 
     /**

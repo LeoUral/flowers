@@ -10,20 +10,19 @@ const ApiError = require('../error/ApiError')
 module.exports = async (db, nameCollection, nameDocument) => {
 
     try {
-        return (async () => {
-            const resultDocum = await db.collection(nameCollection)
-                .findOne({ _id: nameDocument })
+        const resultDocum = await db.collection(nameCollection)
+            .findOne({ _id: nameDocument })
 
-            if (!resultDocum) {
-                const result = await db.collection(nameCollection)
-                    .insertOne({ _id: nameDocument })
+        if (!resultDocum) {
+            const result = await db.collection(nameCollection)
+                .insertOne({ _id: nameDocument })
 
-                return true
-            }
+            return true
+        }
 
-            return false
+        return false
 
-        })()
+
     } catch (err) {
         console.log(`Ошибка (createDocument.js): `, err);
         return (ApiError.badRequest('Ошибка создания документа в DB (createDocument.js)'))
