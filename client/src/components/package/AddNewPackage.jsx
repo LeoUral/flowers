@@ -1,4 +1,5 @@
 import React from 'react'
+import Package from '../server/Package';
 
 export default class AddNewPackage extends React.Component {
     constructor(props) {
@@ -8,8 +9,8 @@ export default class AddNewPackage extends React.Component {
             groupPackage: [],
             typePackage: [],
             colorPackage: [],
-            units: [],
-            photo: [],
+            unitsPackage: [],
+            photoPackage: [],
             package: {
                 groupPackage: [],
                 typePackage: [],
@@ -22,6 +23,24 @@ export default class AddNewPackage extends React.Component {
                 archive: false,
             }
         }
+        this.loadDataBase = this.loadDataBase.bind(this)
+
+    }
+
+    /**
+     * Загрузка данных по упаковке
+     */
+    async loadDataBase() {
+        this.setState({
+            groupPackage: await Package.getOne('group'),
+            typePackage: await Package.getOne('type'),
+            colorPackage: await Package.getOne('color'),
+            unitsPackage: await Package.getOne('units'),
+        })
+    }
+
+    async componentDidMount() {
+        await this.loadDataBase();
     }
 
     render() {
