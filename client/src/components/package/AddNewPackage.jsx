@@ -37,6 +37,8 @@ export default class AddNewPackage extends React.Component {
             colorPackage: await Package.getOne('color'),
             unitsPackage: await Package.getOne('units'),
         })
+
+        setTimeout(() => { console.log(this.state) }, 2000) // test
     }
 
     async componentDidMount() {

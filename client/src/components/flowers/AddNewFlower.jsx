@@ -3,10 +3,6 @@
 import React from 'react';
 import InputString from '../InputString';
 import SelectString from '../SelectString';
-import getNameFlowers from './getNameFlowers'
-import getManufacturer from './getManufacturer'
-import getGrowth from './getGrowth'
-import getGrade from './getGrade'
 import Flowers from '../server/Flowers';
 import { URL_IMG_FLOWER } from '../variables'
 import saveFlower from './saveFlower';
@@ -198,10 +194,10 @@ export default class AddNewFlower extends React.Component {
      */
     async loadDataBase() {
         this.setState({
-            name: await getNameFlowers(),
-            manufacturer: await getManufacturer(),
-            grade: await getGrade(),
-            growth: await getGrowth(),
+            name: await Flowers.getOne('name'),
+            manufacturer: await Flowers.getOne('manufacturer'),
+            grade: await Flowers.getOne('grade'),
+            growth: await Flowers.getOne('growth'),
         })
     }
 
