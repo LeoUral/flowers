@@ -173,107 +173,6 @@ class FlowersController {
     }
 
     /**
-     * Получаем массив сортов цветка
-     * @param {*} req 
-     * @param {*} res 
-     */
-    async getGrade(req, res) {
-        const { collection, document } = req.body
-        const db = req.db;
-
-        try {
-            const result = await getDocument(db, collection, document);
-
-            if (result && result.status === 400) {
-                console.log(`result: `, result); // test
-                return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
-            }
-
-            res.json({ server: 'Массив сорта цветов', result: result })
-
-        } catch (err) {
-            console.log(`Ошибка получения массива сорта цветков: `, err);
-            return next(ApiError.badRequest('Ошибка получения массива сорта цветов'))
-        }
-    }
-
-    /**
-     * Получаем массив длин цветка
-     * @param {*} req 
-     * @param {*} res 
-     */
-    async getGrowth(req, res, next) {
-        const { collection, document } = req.body
-        const db = req.db;
-
-        try {
-            const result = await getDocument(db, collection, document);
-
-            if (result && result.status === 400) {
-                console.log(`result: `, result); // test
-                return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
-            }
-
-            res.json({ server: 'Массив ростовки цветов', result: result })
-
-        } catch (err) {
-            console.log(`Ошибка получения массива ростовки цветков: `, err);
-            return next(ApiError.badRequest('Ошибка получения массива ростовки цветов'))
-        }
-    }
-
-    /**
-     * Получаем массив производителей цветка
-     * @param {*} req 
-     * @param {*} res 
-     */
-    async getManufacturer(req, res, next) {
-        const { collection, document } = req.body
-        const db = req.db;
-
-        try {
-            const result = await getDocument(db, collection, document);
-
-            if (result && result.status === 400) {
-                console.log(`result: `, result); // test
-                return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
-            }
-
-            res.json({ server: 'Массив производителя цветов', result: result })
-
-        } catch (err) {
-            console.log(`Ошибка получения массива производителя цветков: `, err);
-            return next(ApiError.badRequest('Ошибка получения массива производителя цветов'))
-        }
-    }
-
-    /**
-     * Получаем массив названий цветов
-     * @param {*} req 
-     * @param {*} res 
-     */
-    async getName(req, res, next) {
-        const { collection, document } = req.body
-        const db = req.db;
-
-        try {
-            const result = await getDocument(db, collection, document);
-
-            if (result && result.status === 400) {
-                console.log(`result: `, result); // test
-                return next(ApiError.internal('Ошибка получения массива названия цветов'))
-            }
-
-            res.json({ server: 'Массив названия цветов', result: result })
-
-        } catch (err) {
-            console.log(`Ошибка получения массива названия цветков: `, err);
-            return next(ApiError.badRequest('Ошибка получения массива названия цветов'))
-        }
-
-    }
-
-    /**
      * Получаем массив фото цветка
      * @param {*} req 
      * @param {*} res 
@@ -326,8 +225,23 @@ class FlowersController {
      * @param {*} res 
      */
     async getOne(req, res) {
+        const { collection, document } = req.body
+        const db = req.db;
 
-        res.json('flowers controller')
+        try {
+            const result = await getDocument(db, collection, document);
+
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.badRequest(`Ошибка получения массива: ${document}`))
+            }
+
+            res.json({ server: `Массив ${document}`, result: result })
+
+        } catch (err) {
+            console.log(`Ошибка получения массива ${document}: `, err);
+            return next(ApiError.badRequest(`Ошибка получения массива ${document}`))
+        }
     }
 
     /**
