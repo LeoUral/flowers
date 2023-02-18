@@ -15,6 +15,7 @@ export default class Admin extends React.Component {
                     <ModalAdmin
                         textHeader={`ADMIN PANEL`}
                         textFooter={`Рыжая лавка`}
+                        doClose={this.props.doClose}
                     />
                 </div>
             </>

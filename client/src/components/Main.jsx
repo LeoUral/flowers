@@ -20,6 +20,13 @@ export default class Main extends React.Component {
         this.doStart = this.doStart.bind(this);
         this.doExit = this.doExit.bind(this);
         this.doSignIn = this.doSignIn.bind(this);
+        this.doCloseAdmin = this.doCloseAdmin.bind(this);
+    }
+
+    doCloseAdmin() {
+        this.setState({ showAdmin: false })
+        localStorage.removeItem('login');
+        this.doSignIn();
     }
 
     doExit() {
@@ -83,6 +90,14 @@ export default class Main extends React.Component {
                 login: localStorage.getItem('login'),
             })
         }
+
+        //! на время написания, после удалить
+        if (localStorage.getItem('login') === 'Admin') {
+            this.setState({
+                showLogin: false,
+                showAdmin: true,
+            })
+        }
     }
 
     render() {
@@ -98,7 +113,9 @@ export default class Main extends React.Component {
                         doClose={this.doCloseRegistration}
                     />}
                 {this.state.showAdmin &&
-                    <Admin />
+                    <Admin
+                        doClose={this.doCloseAdmin}
+                    />
                 }
 
                 <NaviBar

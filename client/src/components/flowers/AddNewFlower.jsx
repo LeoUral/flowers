@@ -6,7 +6,7 @@ import SelectString from '../SelectString';
 import Flowers from '../server/Flowers';
 import { URL_IMG_FLOWER } from '../variables'
 import saveFlower from './saveFlower';
-import ModalAddPosition from './ModalAddPosition';
+import ModalAddPosition from '../ModalAddPosition';
 import SaveImage from '../SaveImage';
 
 

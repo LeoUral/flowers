@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import React from "react";
 import Flowers from "../flowers/Flowers";
-import Package from '../package/Package';
+import Pack from '../package/Pack';
 import Related from '../related/Related';
 import Bouqet from '../bouqet/Bouqet';
 import Price from '../price/Price';
@@ -26,7 +26,11 @@ export default class ModalAdmin extends React.Component {
 
         }
         this.handleClickBtnPanel = this.handleClickBtnPanel.bind(this);
+        this.handleClickClose = this.handleClickClose.bind(this);
+    }
 
+    handleClickClose() {
+        this.props.doClose();
     }
 
     // todo: Добавить соответствующие компоненты
@@ -145,7 +149,12 @@ export default class ModalAdmin extends React.Component {
                         <header className="modal_window_head" >
                             <span> {this.state.textHeader}</span>
                             <div className="close_modal" >
-                                <div className="close_modal_cross" > &#10006; </div>
+                                <div
+                                    className="close_modal_cross"
+                                    onClick={this.handleClickClose}
+                                >
+                                    &#10006;
+                                </div>
                             </div>
                         </header>
                         <div className="modal_windo_context" >
@@ -157,7 +166,7 @@ export default class ModalAdmin extends React.Component {
                             }
 
                             {this.state.showPackage &&
-                                <Package />
+                                <Pack />
                             }
 
                             {this.state.showRelated &&

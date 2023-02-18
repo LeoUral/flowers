@@ -1,4 +1,57 @@
 @charset "UTF-8";
+@-webkit-keyframes turnn {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes turnn {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+@-webkit-keyframes scale0 {
+  from {
+    scale: 1;
+  }
+  25% {
+    scale: 0.7;
+  }
+  50% {
+    scale: 1;
+  }
+  75% {
+    scale: 0.7;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes scale0 {
+  from {
+    scale: 1;
+  }
+  25% {
+    scale: 0.7;
+  }
+  50% {
+    scale: 1;
+  }
+  75% {
+    scale: 0.7;
+  }
+  to {
+    scale: 1;
+  }
+}
+
 /* 
 * Основной блок стилизации
 */
@@ -274,8 +327,8 @@
   height: 30px;
   border-radius: 50%;
   background-color: #779fcb;
-  top: -30px;
-  right: -30px;
+  top: 10px;
+  right: 10px;
   -webkit-box-shadow: 5px 5px 10px #555;
           box-shadow: 5px 5px 10px #555;
   -webkit-transition: 0.25s;
@@ -291,6 +344,11 @@
   background-color: #e77f51;
   -webkit-transition: 0.25s;
   transition: 0.25s;
+}
+
+.close_modal .close_modal_cross:hover {
+  -webkit-animation: scale0 1s infinite ease-in-out;
+          animation: scale0 1s infinite ease-in-out;
 }
 
 .close_modal:active {

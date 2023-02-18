@@ -1,5 +1,6 @@
 @import './variables';
 @import './color';
+@import './animation';
 
 /* 
 * Основной блок стилизации
@@ -214,8 +215,8 @@
     height: 30px;
     border-radius: 50%;
     background-color: $color_blue;
-    top: -30px;
-    right: -30px;
+    top: 10px;
+    right: 10px;
     box-shadow: $shadow_border_modal_middle;
     transition: 0.25s;
     .close_modal_cross {
@@ -225,6 +226,9 @@
     &:hover {
         background-color: $color_red;
         transition: 0.25s;
+    }
+    .close_modal_cross:hover {
+        animation: scale0 1s infinite ease-in-out;
     }
     &:active {
         box-shadow: none;
