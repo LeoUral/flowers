@@ -1,4 +1,5 @@
 import React from 'react'
+import AddNewRelated from './AddNewRelated';
 
 export default class Related extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class Related extends React.Component {
             <>
                 <div>
                     RELATED COMPONENT
+                    <AddNewRelated />
                 </div>
             </>
         )

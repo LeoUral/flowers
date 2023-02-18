@@ -18,7 +18,7 @@ export default class Clients extends React.Component {
             return (async () => {
                 const checked = await check()
 
-                if (checked.session) {
+                if (checked) {
                     return await Users.getClients();
                 } else {
                     return { messageError: 'Ошибка ключа' }
