@@ -15,8 +15,22 @@ class PackageController {
      * @param {*} req 
      * @param {*} res 
      */
-    async create(req, res) {
+    async create(req, res, next) {
+        const db = req.db
+        const { data } = req.body
+        const id = uuid.v4()
 
+        try {
+            const result = await db.collection('pack')
+                .insertOne({ _id: id, data })
+
+            console.log(`RESULT SAVE: `, result); // test
+            res.json({ server: 'Данные добавлены' })
+
+        } catch (err) {
+            console.log(`Ошибка при добавлении новой позиции упаковки: `, err);
+            return next(ApiError.badRequest('Ошибка при добавлении новой позиции упаковки'))
+        }
     }
 
     /**
@@ -168,7 +182,23 @@ class PackageController {
      * @param {*} res 
      */
     async getAll(req, res) {
+        const db = req.db;
 
+        try {
+            const result = await db.collection('pack')
+                .find({}).toArray()
+
+            if (result && result.status === 400) {
+                console.log(`result: `, result); // test
+                return next(ApiError.internal('Ошибка получения массива упаковки'))
+            }
+
+            res.json({ server: 'Массив упаковки', result: result })
+
+        } catch (err) {
+            console.log(`Ошибка получения массива упаковки: `, err);
+            return next(ApiError.badRequest('Ошибка получения массива упаковки'))
+        }
     }
 
     /**
@@ -202,8 +232,21 @@ class PackageController {
      * @param {*} req 
      * @param {*} res 
      */
-    async deleteOne(req, res) {
+    async deleteOne(req, res, next) {
+        try {
+            const db = req.db
+            const { id } = req.body
+            console.log(`body:::: `, id); // test
 
+            const result = await db.collection('pack')
+                .updateOne({ _id: id }, { $set: { 'data.archive': true } })
+
+            res.json({ delete: 'OK' })
+
+        } catch (err) {
+            console.log(`Ошибка при перемещении в архив упаковки: `, err);
+            return next(ApiError.badRequest('Ошибка при перемещении в архив упаковки'))
+        }
     }
 }
 
