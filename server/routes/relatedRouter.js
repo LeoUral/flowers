@@ -9,8 +9,8 @@ router.post('/description', relatedController.createDescription)
 router.post('/photo', relatedController.createPhoto)
 router.post('/size', relatedController.createSize)
 router.post('/update', relatedController.update)
-router.get('/get_all', relatedController.getAll)
-router.get('/get_one', relatedController.getOne)
+router.post('/get_all', relatedController.getAll)
+router.post('/get_one', relatedController.getOne)
 router.post('/delete', relatedController.deleteOne)
 
 
