@@ -55,7 +55,7 @@ class Related {
             throw new Error('Нет авторизации')
         }
         try {
-            const url = `${this.URL}${PORT}/api/related/create_photo`
+            const url = `${this.URL}${PORT}/api/related/photo`
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -133,7 +133,7 @@ class Related {
             const url = `${this.URL}${PORT}/api/related/description`
 
             const userBody = {
-                type: data
+                description: data
             }
 
             const response = await fetch(url, {
@@ -172,7 +172,7 @@ class Related {
             const url = `${this.URL}${PORT}/api/related/form`
 
             const userBody = {
-                color: data
+                formRelated: data
             }
 
             const response = await fetch(url, {
@@ -211,7 +211,7 @@ class Related {
             const url = `${this.URL}${PORT}/api/related/size`
 
             const userBody = {
-                units: data
+                sizeRelated: data
             }
 
             const response = await fetch(url, {
@@ -250,7 +250,7 @@ class Related {
         try {
             const url = `${this.URL}${PORT}/api/related/get_one`
             const userBody = {
-                collection: 'package',
+                collection: 'related',
                 document: docum,
             }
 

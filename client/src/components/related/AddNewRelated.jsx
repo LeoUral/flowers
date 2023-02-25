@@ -1,11 +1,12 @@
 /* eslint-disable default-case */
 import React from 'react'
-// import Package from '../server/Package';
-// import InputString from '../InputString';
-// import SelectString from '../SelectString';
+import Related from '../server/Related'
+import InputString from '../InputString';
+import SelectString from '../SelectString';
 import { URL_IMG_RELATED } from '../variables'
-// import ModalAddPosition from '../ModalAddPosition';
-// import SaveImage from '../SaveImage';
+import ModalAddPosition from '../ModalAddPosition';
+import SaveImage from '../SaveImage';
+import saveRelated from './saveRelated';
 // import savePackage from './savePackage';
 
 
@@ -35,12 +36,12 @@ export default class AddNewRelated extends React.Component {
             }
         }
 
-        // this.doChangeSelect = this.doChangeSelect.bind(this);
-        // this.handleChangeFile = this.handleChangeFile.bind(this);
-        // this.doChangeInputPosition = this.doChangeInputPosition.bind(this);
-        // this.handleClickAdd = this.handleClickAdd.bind(this);
-        // this.addNewPosition = this.addNewPosition.bind(this);
-        // this.loadDataBase = this.loadDataBase.bind(this);
+        this.doChangeSelect = this.doChangeSelect.bind(this);
+        this.handleChangeFile = this.handleChangeFile.bind(this);
+        this.doChangeInputPosition = this.doChangeInputPosition.bind(this);
+        this.handleClickAdd = this.handleClickAdd.bind(this);
+        this.addNewPosition = this.addNewPosition.bind(this);
+        this.loadDataBase = this.loadDataBase.bind(this);
 
     }
 
@@ -49,158 +50,158 @@ export default class AddNewRelated extends React.Component {
     * @param {*} collection 
     * @param {*} data 
     */
-    // async addNewPosition(collection, data) {
-    //     try {
-    //         (async () => {
-    //             switch (collection) {
-    //                 case 'group':
-    //                     await Package.createGroup(data)
-    //                     await this.loadDataBase();
-    //                     this.setState({ showModalAdd: false })
-    //                     break;
+    async addNewPosition(collection, data) {
+        try {
+            (async () => {
+                switch (collection) {
+                    case 'group':
+                        await Related.createGroup(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
 
-    //                 case 'type':
-    //                     await Package.createType(data)
-    //                     await this.loadDataBase();
-    //                     this.setState({ showModalAdd: false })
-    //                     break;
+                    case 'description':
+                        await Related.createDescription(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
 
-    //                 case 'color':
-    //                     await Package.createColor(data)
-    //                     await this.loadDataBase();
-    //                     this.setState({ showModalAdd: false })
-    //                     break;
+                    case 'form':
+                        await Related.createForm(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
 
-    //                 case 'units':
-    //                     await Package.createUnits(data)
-    //                     await this.loadDataBase();
-    //                     this.setState({ showModalAdd: false })
-    //                     break;
+                    case 'size':
+                        await Related.createSize(data)
+                        await this.loadDataBase();
+                        this.setState({ showModalAdd: false })
+                        break;
 
-    //             }
-    //         })()
-    //     } catch (err) {
-    //         console.log(`Ошибка записи позиции в базу`);
-    //     }
+                }
+            })()
+        } catch (err) {
+            console.log(`Ошибка записи позиции в базу`);
+        }
 
-    // }
+    }
 
 
     /**
    * открытие модалки - сохранение новой позицииs
    * @param {*} e 
    */
-    // handleClickAdd(e) {
-    //     this.setState({
-    //         showModalAdd: true,
-    //         dataSet: e.target.dataset.click,
-    //     })
+    handleClickAdd(e) {
+        this.setState({
+            showModalAdd: true,
+            dataSet: e.target.dataset.click,
+        })
 
-    // }
+    }
 
     /**
        * Добавление новой позиции
        * @param {*} e 
        */
-    // doChangeInputPosition(e) {
+    doChangeInputPosition(e) {
 
-    //     if (e.target.dataset.change === 'button_add') {
-    //         console.log(`click ADD`); // test
-    //         console.log(`collection::: `, this.state.dataSet);
-    //         console.log(`VALUE::: `, this.state.dataValue);
+        if (e.target.dataset.change === 'button_add') {
+            console.log(`click ADD`); // test
+            console.log(`collection::: `, this.state.dataSet);
+            console.log(`VALUE::: `, this.state.dataValue);
 
-    //         // *: Запустить добавление новой позиции
-    //         this.addNewPosition(this.state.dataSet, this.state.dataValue)
+            // *: Запустить добавление новой позиции
+            this.addNewPosition(this.state.dataSet, this.state.dataValue)
 
-    //     } else {
-    //         this.setState({ dataValue: e.target.value })
-    //     }
+        } else {
+            this.setState({ dataValue: e.target.value })
+        }
 
 
-    // }
+    }
 
 
     /**
        * сохранение рисунка
        * @param {*} e 
        */
-    // handleChangeFile(e) {
-    //     console.log(`E >>>> `, e.target.files[0]);
-    //     const file = e.target.files[0];
-    //     try {
-    //         (async () => {
-    //             const formData = new FormData()
-    //             formData.append('img', file)
+    handleChangeFile(e) {
+        console.log(`E >>>> `, e.target.files[0]);
+        const file = e.target.files[0];
+        try {
+            (async () => {
+                const formData = new FormData()
+                formData.append('img', file)
 
-    //             const data = await Package.createPhoto(formData);
+                const data = await Related.createPhoto(formData);
 
-    //             console.log(`FILE NAME:::: `, data);  // test
-    //             let pack = this.state.package;
-    //             pack.photo = data.fileName;
-    //             this.setState({ package: pack });
+                console.log(`FILE NAME:::: `, data);  // test
+                let relat = this.state.related;
+                relat.photo = data.fileName;
+                this.setState({ related: relat });
 
-    //         })()
-    //     } catch (err) {
-    //         console.log(`Ошибка загрузки фото: `, err);
-    //     }
+            })()
+        } catch (err) {
+            console.log(`Ошибка загрузки фото: `, err);
+        }
 
-    // }
+    }
 
 
     /**
      * получаем выбранные данные
      * @param {*} obj 
      */
-    // doChangeSelect(obj) {
-    //     // console.log(obj); // test
+    doChangeSelect(obj) {
+        // console.log(obj); // test
 
-    //     const key = obj.key
-    //     let pack = this.state.package
+        const key = obj.key
+        let relat = this.state.related
 
-    //     switch (key) {
-    //         case 'group':
-    //             pack.groupPackage = obj.text
-    //             this.setState({ package: pack })
-    //             break;
+        switch (key) {
+            case 'group':
+                relat.groupRelated = obj.text
+                this.setState({ related: relat })
+                break;
 
-    //         case 'type':
-    //             pack.typePackage = obj.text
-    //             this.setState({ package: pack })
-    //             break;
+            case 'description':
+                relat.descriptionRelated = obj.text
+                this.setState({ related: relat })
+                break;
 
-    //         case 'color':
-    //             pack.colorPackage = obj.text
-    //             this.setState({ package: pack })
-    //             break;
+            case 'form':
+                relat.formRelated = obj.text
+                this.setState({ related: relat })
+                break;
 
-    //         case 'units':
-    //             pack.units = obj.text
-    //             this.setState({ package: pack })
-    //             break;
+            case 'size':
+                relat.sizeRelated = obj.text
+                this.setState({ related: relat })
+                break;
 
-    //         case 'price':
-    //             pack.pricePurchase = Number(obj.text)
-    //             this.setState({ package: pack })
-    //             break;
+            case 'price':
+                relat.pricePurchase = Number(obj.text)
+                this.setState({ related: relat })
+                break;
 
-    //         case 'quantity':
-    //             pack.quantity = Number(obj.text)
-    //             this.setState({ package: pack })
-    //             break;
-    //     }
-    // }
+            case 'quantity':
+                relat.quantity = Number(obj.text)
+                this.setState({ related: relat })
+                break;
+        }
+    }
 
 
     /**
      * Загрузка данных по упаковке
      */
     async loadDataBase() {
-        // this.setState({
-        //     groupPackage: await Package.getOne('group'),
-        //     typePackage: await Package.getOne('type'),
-        //     colorPackage: await Package.getOne('color'),
-        //     unitsPackage: await Package.getOne('units'),
-        // })
+        this.setState({
+            groupRelated: await Related.getOne('group'),
+            descriptionRelated: await Related.getOne('description'),
+            formRelated: await Related.getOne('form'),
+            sizeRelated: await Related.getOne('size'),
+        })
     }
 
     async componentDidMount() {
@@ -212,132 +213,130 @@ export default class AddNewRelated extends React.Component {
         return (
             <>
                 <div>
-                    ADD NEW RELATED
+                    {this.state.showModalAdd && <ModalAddPosition
+                        nameHeader={this.state.dataSet}
+                        doChange={this.doChangeInputPosition}
+                        dataSet={this.state.dataSet}
+                        doClickClose={() => { this.setState({ showModalAdd: false }) }}
+                    />}
 
-                    {/* {this.state.showModalAdd && <ModalAddPosition
-                    nameHeader={this.state.dataSet}
-                    doChange={this.doChangeInputPosition}
-                    dataSet={this.state.dataSet}
-                    doClickClose={() => { this.setState({ showModalAdd: false }) }}
-                />} */}
-
-                    {/* {this.state.show && <div className='new_flower' >
-                    <div className='new_flower_box' >
-                        <SelectString
-                            title={'Группа упаковки:'}
-                            placeholder={'Группа упаковки'}
-                            keySelect={'group'}
-                            arr={this.state.groupPackage}
-                            doChangeSelect={this.doChangeSelect}
-                        />
-                        <div className='new_flower_box_btn' >
-                            <button
-                                className='btn_panel btn_save'
-                                data-click='group'
-                                onClick={this.handleClickAdd}
-                            >
-                                + группа
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className='new_flower_box' >
-                        <SelectString
-                            title={'Тип упаковки:'}
-                            placeholder={'Тип упаковки'}
-                            keySelect={'type'}
-                            arr={this.state.typePackage}
-                            doChangeSelect={this.doChangeSelect}
-                        />
-
-                        <div className='new_flower_box_btn' >
-                            <button
-                                className='btn_panel btn_save'
-                                data-click='type'
-                                onClick={this.handleClickAdd}
-                            >
-                                + тип
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <div className='new_flower_box' >
-                        <SelectString
-                            title={'Цвет:'}
-                            placeholder={'цвет'}
-                            keySelect={'color'}
-                            arr={this.state.colorPackage}
-                            doChangeSelect={this.doChangeSelect}
-                        />
-                        <div className='new_flower_box_btn' >
-                            <button
-                                className='btn_panel btn_save'
-                                data-click='color'
-                                onClick={this.handleClickAdd}
-                            >
-                                + цвет
-                            </button>
+                    {this.state.show && <div className='new_flower' >
+                        <div className='new_flower_box' >
+                            <SelectString
+                                title={'Группа сопутствующих товаров:'}
+                                placeholder={'Группа сопутствующих тов'}
+                                keySelect={'group'}
+                                arr={this.state.groupRelated}
+                                doChangeSelect={this.doChangeSelect}
+                            />
+                            <div className='new_flower_box_btn' >
+                                <button
+                                    className='btn_panel btn_save'
+                                    data-click='group'
+                                    onClick={this.handleClickAdd}
+                                >
+                                    + группа
+                                </button>
+                            </div>
                         </div>
 
-                    </div>
+                        <div className='new_flower_box' >
+                            <SelectString
+                                title={'Описание сопутствующих товаров:'}
+                                placeholder={'описание'}
+                                keySelect={'description'}
+                                arr={this.state.descriptionRelated}
+                                doChangeSelect={this.doChangeSelect}
+                            />
 
-
-                    <div className='new_flower_box' >
-                        <SelectString
-                            title={'Ед.изм:'}
-                            placeholder={'ед.изм'}
-                            keySelect={'units'}
-                            arr={this.state.unitsPackage}
-                            doChangeSelect={this.doChangeSelect}
-                        />
-                        <div className='new_flower_box_btn' >
-                            <button
-                                className='btn_panel btn_save'
-                                data-click='units'
-                                onClick={this.handleClickAdd}
-                            >
-                                + ед.изм
-                            </button>
+                            <div className='new_flower_box_btn' >
+                                <button
+                                    className='btn_panel btn_save'
+                                    data-click='description'
+                                    onClick={this.handleClickAdd}
+                                >
+                                    + описание
+                                </button>
+                            </div>
                         </div>
 
 
-                    </div>
+                        <div className='new_flower_box' >
+                            <SelectString
+                                title={'Форма:'}
+                                placeholder={'форма'}
+                                keySelect={'form'}
+                                arr={this.state.formRelated}
+                                doChangeSelect={this.doChangeSelect}
+                            />
+                            <div className='new_flower_box_btn' >
+                                <button
+                                    className='btn_panel btn_save'
+                                    data-click='form'
+                                    onClick={this.handleClickAdd}
+                                >
+                                    + форма
+                                </button>
+                            </div>
 
-                    <div className='new_flower_box' >
-                        <InputString
-                            title={'Цена закупки, руб.'}
-                            placeholder={'цена'}
-                            keyInput={'price'}
-                            doChangeSelect={this.doChangeSelect}
+                        </div>
+
+
+                        <div className='new_flower_box' >
+                            <SelectString
+                                title={'Размер:'}
+                                placeholder={'размер'}
+                                keySelect={'size'}
+                                arr={this.state.sizeRelated}
+                                doChangeSelect={this.doChangeSelect}
+                            />
+                            <div className='new_flower_box_btn' >
+                                <button
+                                    className='btn_panel btn_save'
+                                    data-click='size'
+                                    onClick={this.handleClickAdd}
+                                >
+                                    + размер
+                                </button>
+                            </div>
+
+
+                        </div>
+
+                        <div className='new_flower_box' >
+                            <InputString
+                                title={'Цена закупки, руб.'}
+                                placeholder={'цена'}
+                                keyInput={'price'}
+                                doChangeSelect={this.doChangeSelect}
+                            />
+                        </div>
+                        <div className='new_flower_box' >
+                            <InputString
+                                title={'Кол-во'}
+                                placeholder={'кол-во'}
+                                keyInput={'quantity'}
+                                doChangeSelect={this.doChangeSelect}
+                            />
+                        </div>
+
+                        <SaveImage
+                            handleChangeFile={this.handleChangeFile}
+                            srcImg={srcImg}
                         />
-                    </div>
-                    <div className='new_flower_box' >
-                        <InputString
-                            title={'Кол-во'}
-                            placeholder={'кол-во'}
-                            keyInput={'quantity'}
-                            doChangeSelect={this.doChangeSelect}
-                        />
-                    </div>
 
-                    <SaveImage
-                        handleChangeFile={this.handleChangeFile}
-                        srcImg={srcImg}
-                    />
-
-                    <div className='new_flower_box' >
-                        <button
-                            className='btn_panel btn_save'
-                            onClick={async () => {
-                                await savePackage(this.state.package);
-                                this.props.newPackage()
-                            }}
-                        >
-                            Добавить
-                        </button>
-                    </div>
-                </div>} */}
+                        <div className='new_flower_box' >
+                            <button
+                                className='btn_panel btn_save'
+                                onClick={async () => {
+                                    await saveRelated(this.state.related);
+                                    this.props.newRealted()
+                                }}
+                            >
+                                Добавить
+                            </button>
+                        </div>
+                    </div>}
                 </div>
             </>
         )

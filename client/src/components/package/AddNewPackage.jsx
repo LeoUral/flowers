@@ -4,7 +4,6 @@ import Package from '../server/Package';
 import InputString from '../InputString';
 import SelectString from '../SelectString';
 import { URL_IMG_PACKAGE } from '../variables'
-// import saveFlower from './saveFlower';
 import ModalAddPosition from '../ModalAddPosition';
 import SaveImage from '../SaveImage';
 import savePackage from './savePackage';

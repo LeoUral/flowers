@@ -33,7 +33,7 @@ export default class Pack extends React.Component {
     async getAllPackage() {
         try {
             (async () => {
-                // *: Получить с базы всю срезку для формирования таблицы
+                // *: Получить с базы всю упаковку для формирования таблицы
                 const resultAllPack = await Package.getAll();
                 this.setState({ package: resultAllPack.result });
 
@@ -92,12 +92,13 @@ export default class Pack extends React.Component {
                         handleClickDeletePack={this.doDeletePack}
                     />
 
-                    {this.state.showCut && <ModalPackage
-                        textHeader={'HEADER'}
-                        textFooter={'FOOTER'}
-                        closeModal={this.closeModal}
-                        packData={this.state.packData}
-                    />}
+                    {this.state.showCut &&
+                        <ModalPackage
+                            textHeader={'HEADER'}
+                            textFooter={'FOOTER'}
+                            closeModal={this.closeModal}
+                            packData={this.state.packData}
+                        />}
 
                 </div>
 
